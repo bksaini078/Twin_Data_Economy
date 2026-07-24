@@ -564,12 +564,16 @@
     }
 
     .badge {
-      display: inline-block;
-      padding: 3px 10px;
-      border-radius: 5px;
-      font-size: .78rem;
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-size: .7rem;
       font-weight: 600;
-      font-family: 'JetBrains Mono', monospace;
+      font-family: 'Inter', sans-serif;
+      white-space: nowrap;
+      vertical-align: middle;
+      line-height: 1.3;
     }
 
     .b-good {
@@ -883,15 +887,16 @@
 
     .phase-card ul {
       list-style: none;
-      margin: 10px 0;
+      margin: 8px 0;
+      padding: 0;
     }
 
     .phase-card ul li {
-      font-size: .84rem;
+      font-size: .78rem;
       color: var(--text-2);
-      padding: 3px 0 3px 14px;
+      padding: 2px 0 2px 12px;
       position: relative;
-      line-height: 1.45;
+      line-height: 1.4;
     }
 
     .phase-card ul li::before {
@@ -900,6 +905,22 @@
       left: 0;
       color: var(--accent);
       font-weight: bold;
+    }
+
+    .phase-card .sub-bullets {
+      margin: 2px 0 4px 6px;
+      padding-left: 0;
+    }
+
+    .phase-card .sub-bullets li {
+      font-size: 0.74rem;
+      padding: 1px 0 1px 10px;
+    }
+
+    .phase-card .sub-bullets li::before {
+      content: '•';
+      color: var(--text-3);
+      font-size: 0.65rem;
     }
 
     .phase-metrics {
@@ -1802,18 +1823,16 @@
             <div class="track-node" data-phase="2">2028-29</div>
             <div class="track-node" data-phase="3">2029-30</div>
             <div class="track-node" data-phase="4">2030-31</div>
-          </div>
-
-          <div class="phase-cards-grid">
+          </div>          <div class="phase-cards-grid">
             <div class="phase-card active-phase" id="pc0">
               <div>
                 <div class="phase-tag">Phase 1 &middot; 2026-27</div>
                 <h4>Foundation & IP</h4>
                 <ul>
-                  <li><strong>Distortion removal study & IP filing</strong></li>
+                  <li><strong>Distortion removal & IP filing</strong></li>
                   <li>CHI / UMAP papers published</li>
-                  <li>MVP web app & behavioural log companion</li>
-                  <li>Seed user onboarding</li>
+                  <li>MVP web app & log companion</li>
+                  <li>Seed user onboarding (500 twins)</li>
                 </ul>
               </div>
               <div class="phase-metrics">
@@ -1840,15 +1859,20 @@
                 <div class="phase-metric-item">Team: <strong>4-6</strong></div>
               </div>
             </div>
+
             <div class="phase-card" id="pc2">
               <div>
                 <div class="phase-tag">Phase 3 &middot; 2028-29</div>
-                <h4>Market & Use-Case Scaling</h4>
+                <h4>Market Scaling</h4>
                 <ul>
                   <li><strong>Self-serve consent marketplace</strong></li>
-                  <li><strong>Multi-stream earnings v1:</strong> Surveys, <span class="badge b-acc">UX Testing</span> & <span class="badge b-good">Decision Support</span></li>
-                  <li><strong>Automated payouts:</strong> ~10-20% revenue share to creators</li>
-                  <li>Model v2 benchmarks & Series A round</li>
+                  <li><strong>Monetization Streams v1:</strong></li>
+                  <ul class="sub-bullets">
+                    <li>Surveys & <span class="badge b-acc">UX Testing</span></li>
+                    <li><span class="badge b-good">Decision Support</span></li>
+                  </ul>
+                  <li><strong>Payouts:</strong> ~10-20% creator share</li>
+                  <li>Series A growth round</li>
                 </ul>
               </div>
               <div class="phase-metrics">
@@ -1861,11 +1885,16 @@
             <div class="phase-card" id="pc3">
               <div>
                 <div class="phase-tag">Phase 4 &middot; 2029-30</div>
-                <h4>Advanced Multi-Stream Expansion</h4>
+                <h4>Advanced Expansion</h4>
                 <ul>
-                  <li><strong>Advanced Multi-Stream Payouts:</strong> <span class="badge b-good">Society & Scenario Sim</span>, <span class="badge b-acc">Policy Decision Support</span>, <span class="badge b-good">AI Alignment Data</span> & <span class="badge b-acc">Robotics Embodied Data</span></li>
-                  <li><strong>Cross-cultural embeddings v3</strong> & US/EU multi-region compliance</li>
-                  <li>Enterprise CRM & BI analytics integrations</li>
+                  <li><strong>Enterprise Multi-Stream:</strong></li>
+                  <ul class="sub-bullets">
+                    <li><span class="badge b-good">Society & Scenario Sim</span></li>
+                    <li><span class="badge b-acc">Policy Support</span></li>
+                    <li><span class="badge b-good">AI Alignment Data</span></li>
+                    <li><span class="badge b-acc">Robotics Data</span></li>
+                  </ul>
+                  <li><strong>Cross-cultural v3</strong> & US/EU rules</li>
                   <li>Scale to 75K active twins</li>
                 </ul>
               </div>
@@ -1879,11 +1908,14 @@
             <div class="phase-card" id="pc4">
               <div>
                 <div class="phase-tag">Phase 5 &middot; 2030-31</div>
-                <h4>Global Platform & Humanoid Robotics</h4>
+                <h4>Global Platform</h4>
                 <ul>
-                  <li><strong>Foundation Behavioral Model & Humanoid Robotics:</strong> Training embodied <span class="badge b-good">Humanoid Robot</span> decision networks from consented twin data streams</li>
-                  <li><strong>Open consent protocol standard</strong> & global twin data exchange</li>
-                  <li>Global market leadership across enterprise & robotics AI</li>
+                  <li><strong>Foundation Model v4</strong></li>
+                  <li><strong>Humanoid Robotics AI:</strong></li>
+                  <ul class="sub-bullets">
+                    <li>Training <span class="badge b-good">Humanoid Robots</span> from twin streams</li>
+                  </ul>
+                  <li>Open consent protocol standard</li>
                   <li>Scale to 350K active twins</li>
                 </ul>
               </div>
