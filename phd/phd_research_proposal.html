@@ -1,42 +1,50 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PhD Research Status Update - Human Digital Twins for Enterprise Decision Support</title>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
-    rel="stylesheet">
+  <title>PhD Research Dashboard — Bhupender Kumar Saini</title>
+  <meta name="description" content="A living academic dashboard tracking doctoral research on Human Digital Twins for Enterprise Decision Support. Bhupender Kumar Saini, Fraunhofer IAO, Stuttgart.">
+  <meta name="author" content="Bhupender Kumar Saini">
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <style>
-    :root[data-theme="light"] {
-      --bg: #fdfbf7;
-      --panel: #ffffff;
-      --card: #ffffff;
-      --card-alt: #f5f2eb;
-      --border: #e6e2d8;
-      --border-strong: #c2baa6;
-      --text: #1a1a1a;
-      --text-2: #4a4a4a;
-      --text-3: #737373;
-      --accent: #0f5132;
-      --accent-2: #146c43;
-      --accent-soft: #d1e7dd;
-      --good: #0f5132;
-      --good-soft: #d1e7dd;
-      --warn: #664d03;
-      --warn-soft: #fff3cd;
-      --bad: #842029;
-      --bad-soft: #f8d7da;
-      --info: #052c65;
-      --info-soft: #cff4fc;
-      --glow: rgba(15, 81, 50, 0.1);
-      --shadow: 0 4px 20px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+    /* ============================================================
+       CSS CUSTOM PROPERTIES
+    ============================================================ */
+    :root {
+      --sidebar-w: 228px;
+      --topbar-h: 54px;
     }
 
-    :root[data-theme="dark"] {
-      --bg: #0d1117;
+    [data-theme="light"] {
+      --bg: #f8f6f1;
+      --panel: #ffffff;
+      --card: #ffffff;
+      --card-alt: #f0ede6;
+      --border: #e2ddd6;
+      --border-strong: #c4bdb2;
+      --text: #1c1c24;
+      --text-2: #4e4e60;
+      --text-3: #8a8a9a;
+      --accent: #1e3a5f;
+      --accent-soft: #dbeafe;
+      --running: #1a6b3c;
+      --running-soft: #dcfce7;
+      --planned: #6b7280;
+      --planned-soft: #f3f4f6;
+      --warn: #b45309;
+      --warn-soft: #fef3c7;
+      --target: #6d28d9;
+      --target-soft: #ede9fe;
+      --info: #1d4ed8;
+      --info-soft: #dbeafe;
+      --shadow: 0 1px 3px rgba(0,0,0,0.07), 0 4px 12px rgba(0,0,0,0.04);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.09), 0 1px 4px rgba(0,0,0,0.05);
+    }
+
+    [data-theme="dark"] {
+      --bg: #0e1117;
       --panel: #161b22;
       --card: #21262d;
       --card-alt: #30363d;
@@ -45,1758 +53,1472 @@
       --text: #c9d1d9;
       --text-2: #8b949e;
       --text-3: #484f58;
-      --accent: #58a6ff;
-      --accent-2: #79c0ff;
-      --accent-soft: #1f6feb;
-      --good: #3fb950;
-      --good-soft: #238636;
+      --accent: #79c0ff;
+      --accent-soft: #1f3c5e;
+      --running: #3fb950;
+      --running-soft: #162821;
+      --planned: #8b949e;
+      --planned-soft: #21262d;
       --warn: #d29922;
-      --warn-soft: #9e6a03;
-      --bad: #f85149;
-      --bad-soft: #da3633;
-      --info: #58a6ff;
-      --info-soft: #1f6feb;
-      --glow: rgba(88, 166, 255, 0.15);
-      --shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 1px 3px rgba(0, 0, 0, 0.2);
+      --warn-soft: #2e1f04;
+      --target: #a78bfa;
+      --target-soft: #2d1f5e;
+      --info: #79c0ff;
+      --info-soft: #1f3c5e;
+      --shadow: 0 1px 3px rgba(0,0,0,0.3), 0 4px 12px rgba(0,0,0,0.2);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.4), 0 1px 4px rgba(0,0,0,0.2);
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      font-size: 15.5px;
-    }
-
+    /* ============================================================
+       RESET
+    ============================================================ */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { font-size: 15px; scroll-behavior: smooth; }
     body {
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
       background: var(--bg);
       color: var(--text);
-      height: 100vh;
-      width: 100vw;
-      overflow: hidden;
-      transition: background .35s ease, color .35s ease;
       line-height: 1.6;
+      transition: background 0.3s, color 0.3s;
     }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
 
-    /* Top bar */
+    /* ============================================================
+       TOPBAR
+    ============================================================ */
     .topbar {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 54px;
+      top: 0; left: 0; right: 0;
+      height: var(--topbar-h);
       z-index: 100;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 24px;
+      padding: 0 24px 0 calc(var(--sidebar-w) + 20px);
       background: var(--panel);
       border-bottom: 1px solid var(--border);
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+      box-shadow: var(--shadow);
     }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 700;
-      font-size: 1.05rem;
-      letter-spacing: .01em;
-      color: var(--text);
-    }
-
-    .brand .title-text {
+    .topbar-left { display: flex; flex-direction: column; gap: 1px; }
+    .topbar-title {
       font-family: 'Newsreader', serif;
-      font-size: 1.15rem;
+      font-size: 1rem;
       font-weight: 600;
       color: var(--text);
+      line-height: 1.2;
     }
-
-    .brand .tag {
+    .topbar-sub {
       font-family: 'JetBrains Mono', monospace;
-      font-size: .7rem;
+      font-size: 0.6rem;
       font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: .12em;
       color: var(--text-3);
-      padding-left: 14px;
-      border-left: 1px solid var(--border);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
     }
-
-    .tb-actions {
-      display: flex;
-      gap: 10px;
-      align-items: center;
+    .topbar-actions { display: flex; align-items: center; gap: 10px; }
+    .updated-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--text-3);
+      padding: 3px 10px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: var(--card);
     }
-
-    .btn {
-      height: 35px;
-      min-width: 35px;
-      padding: 0 12px;
-      border-radius: 7px;
+    .icon-btn {
+      width: 34px; height: 34px;
+      border-radius: 8px;
       border: 1px solid var(--border);
       background: var(--card);
       color: var(--text-2);
       cursor: pointer;
-      font-size: .86rem;
-      font-weight: 500;
-      font-family: 'Inter', sans-serif;
-      display: inline-flex;
+      display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      transition: all .2s ease;
+      transition: all 0.2s;
+      font-size: 0.9rem;
+      line-height: 1;
     }
+    .icon-btn:hover { border-color: var(--border-strong); color: var(--text); background: var(--card-alt); }
 
-    .btn:hover {
-      border-color: var(--border-strong);
-      color: var(--text);
-      background: var(--card-alt);
-      transform: translateY(-1px);
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.04);
-    }
-
-    .btn:active {
-      transform: translateY(1px);
-    }
-
-    .btn:disabled {
-      opacity: .4;
-      cursor: not-allowed;
-      transform: none;
-    }
-
-    .btn.active {
-      background: var(--accent);
-      color: #fff;
-      border-color: var(--accent);
-    }
-
-    /* Progress */
-    .progress {
+    /* ============================================================
+       SIDEBAR
+    ============================================================ */
+    .sidebar {
       position: fixed;
-      top: 54px;
-      left: 0;
-      height: 3px;
-      background: var(--accent);
-      z-index: 100;
-      transition: width .35s ease;
-    }
-
-    /* TOC Sidebar Drawer */
-    .toc-backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(15, 23, 42, .55);
-      backdrop-filter: blur(3px);
-      opacity: 0;
-      visibility: hidden;
-      transition: .3s;
-      z-index: 190;
-    }
-
-    .toc-backdrop.open {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .toc {
-      position: fixed;
-      top: 0;
-      left: 0;
+      top: 0; left: 0;
+      width: var(--sidebar-w);
       height: 100vh;
-      width: 360px;
-      max-width: 85vw;
-      z-index: 200;
       background: var(--panel);
       border-right: 1px solid var(--border);
-      transform: translateX(-100%);
-      transition: transform .32s cubic-bezier(.4, 0, .2, 1);
       display: flex;
       flex-direction: column;
-      box-shadow: var(--shadow);
-    }
-
-    .toc.open {
-      transform: translateX(0);
-    }
-
-    .toc-head {
-      padding: 24px 24px 18px;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .toc-head h3 {
-      font-family: 'Newsreader', serif;
-      font-size: 1.35rem;
-      font-weight: 600;
-    }
-
-    .toc-head .sub {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .65rem;
-      text-transform: uppercase;
-      letter-spacing: .12em;
-      color: var(--text-3);
-      margin-top: 4px;
-    }
-
-    .toc-list {
-      flex: 1;
+      z-index: 90;
       overflow-y: auto;
-      padding: 12px;
     }
-
-    .toc-list::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    .toc-list::-webkit-scrollbar-thumb {
-      background: var(--border-strong);
-      border-radius: 4px;
-    }
-
-    .toc-chapter {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .66rem;
-      font-weight: 600;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: var(--text-3);
-      padding: 16px 12px 6px;
-    }
-
-    .toc-item {
+    .sb-brand {
+      padding: 14px 16px 12px;
+      border-bottom: 1px solid var(--border);
+      min-height: var(--topbar-h);
       display: flex;
-      gap: 12px;
-      align-items: baseline;
-      padding: 10px 14px;
-      border-radius: 7px;
-      cursor: pointer;
-      border: 1px solid transparent;
-      transition: .15s;
-    }
-
-    .toc-item:hover {
-      background: var(--card-alt);
-    }
-
-    .toc-item.active {
-      background: var(--accent-soft);
-      border-color: var(--border);
-    }
-
-    .toc-num {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .78rem;
-      font-weight: 600;
-      color: var(--accent);
-      min-width: 24px;
-    }
-
-    .toc-text {
-      font-size: 1.02rem;
-      color: var(--text-2);
-      line-height: 1.35;
-    }
-
-    .toc-item.active .toc-text {
-      color: var(--text);
-      font-weight: 600;
-    }
-
-    /* Grid View Modal */
-    .grid-modal {
-      position: fixed;
-      inset: 0;
-      z-index: 250;
-      background: rgba(15, 23, 42, .7);
-      backdrop-filter: blur(5px);
-      opacity: 0;
-      visibility: hidden;
-      transition: .3s;
-      display: flex;
-      align-items: center;
+      flex-direction: column;
       justify-content: center;
-      padding: 30px;
     }
-
-    .grid-modal.open {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .grid-modal-content {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      width: 100%;
-      max-width: 1100px;
-      max-height: 85vh;
-      display: flex;
-      flex-direction: column;
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-
-    .grid-modal-head {
-      padding: 20px 24px;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .slide-thumbnails-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 16px;
-      padding: 24px;
-      overflow-y: auto;
-    }
-
-    .thumb-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 16px;
-      cursor: pointer;
-      transition: all .2s ease;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      height: 120px;
-    }
-
-    .thumb-card:hover {
-      border-color: var(--accent);
-      transform: translateY(-2px);
-      box-shadow: var(--shadow);
-    }
-
-    .thumb-card.active {
-      border-color: var(--accent);
-      background: var(--accent-soft);
-    }
-
-    .thumb-num {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .7rem;
-      font-weight: 600;
-      color: var(--accent);
-    }
-
-    .thumb-title {
-      font-size: .92rem;
+    .sb-name {
+      font-family: 'Newsreader', serif;
+      font-size: 0.92rem;
       font-weight: 600;
       color: var(--text);
       line-height: 1.3;
     }
-
-    /* Deck & Slides */
-    .deck {
-      position: absolute;
-      top: 54px;
-      left: 0;
-      right: 0;
-      bottom: 44px;
-    }
-
-    .slide {
-      position: absolute;
-      inset: 0;
-      overflow-y: auto;
-      padding: 38px 50px 64px;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity .35s ease, visibility 0s .35s;
-    }
-
-    .slide.active {
-      opacity: 1;
-      visibility: visible;
-      transition: opacity .35s ease, visibility 0s 0s;
-    }
-
-    .slide::-webkit-scrollbar {
-      width: 10px;
-    }
-
-    .slide::-webkit-scrollbar-thumb {
-      background: var(--border-strong);
-      border-radius: 5px;
-    }
-
-    .wrap {
-      max-width: 1140px;
-      margin: 0 auto;
-    }
-
-    /* Typography */
-    h1 {
-      font-family: 'Newsreader', serif;
-      font-size: 2.35rem;
-      font-weight: 600;
-      line-height: 1.18;
-      letter-spacing: -.015em;
-      margin-bottom: 14px;
-      color: var(--text);
-    }
-
-    h2 {
-      font-family: 'Newsreader', serif;
-      font-size: 1.9rem;
-      font-weight: 600;
-      line-height: 1.22;
-      margin-bottom: 14px;
-      color: var(--text);
-    }
-
-    h3 {
-      font-family: 'Newsreader', serif;
-      font-size: 1.25rem;
-      font-weight: 600;
-      margin-bottom: 10px;
-      color: var(--text);
-    }
-
-    h4 {
-      font-size: 1.02rem;
-      font-weight: 600;
-      margin-bottom: 6px;
-      color: var(--text);
-    }
-
-    p {
-      font-size: 0.95rem;
-      line-height: 1.65;
-      color: var(--text-2);
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 16px;
+    .sb-role {
       font-family: 'JetBrains Mono', monospace;
-      font-size: .7rem;
-      font-weight: 600;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: var(--accent);
-      padding-bottom: 5px;
-      border-bottom: 2px solid var(--accent);
-    }
-
-    .lead {
-      font-size: 1.1rem;
-      line-height: 1.65;
-      color: var(--text-2);
-      max-width: 820px;
-      font-weight: 400;
-    }
-
-    .grid-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 22px;
-    }
-
-    .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
-    }
-
-    .grid-4 {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 18px;
-    }
-
-    .split {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 44px;
-      align-items: start;
-    }
-
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 22px;
-      transition: all .22s ease;
-      position: relative;
-    }
-
-    .card:hover {
-      border-color: var(--border-strong);
-      box-shadow: var(--shadow);
-      transform: translateY(-2px);
-    }
-
-    .card p {
-      font-size: .88rem;
-      line-height: 1.55;
-      color: var(--text-2);
-      margin: 0;
-    }
-
-    .card h4 {
-      font-size: 1.02rem;
-    }
-
-    .tick {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .68rem;
-      font-weight: 600;
-      color: var(--accent);
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      display: block;
-      margin-bottom: 8px;
-    }
-
-    .stat {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 22px;
-      text-align: left;
-      transition: all .2s ease;
-    }
-
-    .stat:hover {
-      border-color: var(--border-strong);
-      box-shadow: var(--shadow);
-    }
-
-    .stat .num {
-      font-family: 'Newsreader', serif;
-      font-size: 1.95rem;
-      font-weight: 600;
-      color: var(--accent);
-      line-height: 1.1;
-      margin-bottom: 6px;
-    }
-
-    .stat .lbl {
-      font-size: .85rem;
-      color: var(--text-2);
-      line-height: 1.45;
-      font-weight: 400;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: .86rem;
-    }
-
-    .table-wrap {
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
-    }
-
-    th {
-      background: var(--card-alt);
-      padding: 11px 15px;
-      text-align: left;
-      font-family: 'JetBrains Mono', monospace;
-      font-weight: 600;
-      font-size: .72rem;
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      color: var(--text-2);
-      border-bottom: 1px solid var(--border);
-    }
-
-    td {
-      padding: 10px 15px;
-      border-top: 1px solid var(--border);
-      color: var(--text-2);
-      background: var(--card);
-      line-height: 1.45;
-    }
-
-    tr:hover td {
-      background: var(--card-alt);
-      color: var(--text);
-    }
-
-    .hl td {
-      background: var(--accent-soft) !important;
+      font-size: 0.57rem;
       font-weight: 500;
+      color: var(--text-3);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-top: 2px;
+    }
+    .sb-nav { padding: 8px; flex: 1; }
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 9px 10px;
+      border-radius: 7px;
+      cursor: pointer;
+      color: var(--text-2);
+      font-size: 0.83rem;
+      font-weight: 500;
+      border: 1px solid transparent;
+      transition: all 0.15s;
+      margin-bottom: 1px;
+      text-decoration: none;
+      line-height: 1.3;
+    }
+    .nav-item:hover { background: var(--card-alt); color: var(--text); text-decoration: none; }
+    .nav-item.active { background: var(--accent-soft); border-color: var(--border); color: var(--accent); font-weight: 600; }
+    .nav-icon { width: 15px; height: 15px; flex-shrink: 0; opacity: 0.65; }
+    .nav-item.active .nav-icon { opacity: 1; }
+    .sb-footer { padding: 10px 14px; border-top: 1px solid var(--border); }
+    .sb-links { display: flex; gap: 8px; flex-wrap: wrap; }
+    .sb-link {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem;
+      font-weight: 600;
+      color: var(--text-3);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      transition: color 0.15s;
+      text-decoration: none;
+    }
+    .sb-link:hover { color: var(--accent); text-decoration: none; }
+
+    /* ============================================================
+       MAIN CONTENT
+    ============================================================ */
+    .main { margin-left: var(--sidebar-w); padding-top: var(--topbar-h); }
+    .section { padding: 44px 48px 60px; border-bottom: 1px solid var(--border); }
+    .section:last-child { border-bottom: none; }
+    .section-inner { max-width: 1040px; }
+    .section-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-eyebrow::after {
+      content: '';
+      display: inline-block;
+      height: 1px;
+      width: 36px;
+      background: var(--border-strong);
+    }
+    .section-title {
+      font-family: 'Newsreader', serif;
+      font-size: 1.85rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.2;
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+    }
+    .section-lead {
+      font-size: 0.9rem;
+      color: var(--text-2);
+      line-height: 1.68;
+      margin-bottom: 28px;
+      max-width: 700px;
     }
 
+    /* ============================================================
+       BADGES
+    ============================================================ */
     .badge {
       display: inline-flex;
       align-items: center;
+      gap: 4px;
       padding: 2px 7px;
-      border-radius: 4px;
-      font-size: .7rem;
-      font-weight: 600;
-      font-family: 'Inter', sans-serif;
-      white-space: nowrap;
-      vertical-align: middle;
-      line-height: 1.3;
-    }
-
-    .b-good {
-      background: var(--good-soft);
-      color: var(--good);
-    }
-
-    .b-bad {
-      background: var(--bad-soft);
-      color: var(--bad);
-    }
-
-    .b-acc {
-      background: var(--accent-soft);
-      color: var(--accent);
-    }
-
-    .b-warn {
-      background: var(--warn-soft);
-      color: var(--warn);
-    }
-
-    .bullets {
-      list-style: none;
-    }
-
-    .bullets li {
-      position: relative;
-      padding: 8px 0 8px 24px;
-      font-size: .98rem;
-      color: var(--text-2);
-      line-height: 1.65;
-    }
-
-    .bullets li::before {
-      content: '';
-      position: absolute;
-      left: 4px;
-      top: 16px;
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--accent);
-    }
-
-    .callout {
-      border-left: 4px solid var(--accent);
-      background: var(--accent-soft);
-      padding: 16px 22px;
-      border-radius: 0 8px 8px 0;
-      margin-top: 22px;
-    }
-
-    .callout p {
-      font-size: .98rem;
-      margin: 0;
-      color: var(--text-2);
-      line-height: 1.65;
-    }
-
-    .callout.good {
-      border-color: var(--good);
-      background: var(--good-soft);
-    }
-
-    .callout.good p {
-      color: var(--good);
-    }
-
-    .quote {
-      border-left: 4px solid var(--border-strong);
-      padding: 14px 24px;
-      margin-top: 22px;
-      background: var(--card-alt);
-      border-radius: 0 8px 8px 0;
-    }
-
-    .quote p {
-      font-family: 'Newsreader', serif;
-      font-style: italic;
-      font-size: 1.15rem;
-      color: var(--text);
-      line-height: 1.55;
-    }
-
-    .quote cite {
+      border-radius: 20px;
       font-family: 'JetBrains Mono', monospace;
-      font-size: .8rem;
-      color: var(--text-3);
-      font-style: normal;
-      display: block;
-      margin-top: 8px;
-      font-weight: 500;
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      white-space: nowrap;
     }
+    .badge-running  { background: var(--running-soft);  color: var(--running);  }
+    .badge-planned  { background: var(--planned-soft);  color: var(--planned);  }
+    .badge-target   { background: var(--target-soft);   color: var(--target);   }
+    .badge-deadline { background: var(--warn-soft);     color: var(--warn);     }
+    .badge-info     { background: var(--info-soft);     color: var(--info);     }
+    .badge-pub      { background: var(--running-soft);  color: var(--running);  }
+    .badge-ea       { background: var(--planned-soft);  color: var(--planned);  }
+    .badge-chapter  { background: var(--info-soft);     color: var(--info);     }
+    .badge-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
 
-    .chart-box {
-      position: relative;
-      width: 100%;
-      height: 280px;
-      margin-top: 16px;
+    /* ============================================================
+       DASHBOARD KPIs
+    ============================================================ */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .kpi-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-top: 3px solid;
+      border-radius: 10px;
+      padding: 16px 18px;
+      box-shadow: var(--shadow);
+      transition: box-shadow 0.2s;
+    }
+    .kpi-card:hover { box-shadow: var(--shadow-md); }
+    .kpi-card.accent-top { border-top-color: var(--accent); }
+    .kpi-card.running-top { border-top-color: var(--running); }
+    .kpi-card.warn-top   { border-top-color: var(--warn); }
+    .kpi-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.58rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 7px;
+    }
+    .kpi-value {
+      font-family: 'Newsreader', serif;
+      font-size: 1.9rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .kpi-sub { font-size: 0.76rem; color: var(--text-3); line-height: 1.4; }
+
+    /* Phase progress */
+    .phase-prog-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 22px;
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+    }
+    .phase-prog-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+    .phase-prog-label { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-3); }
+    .phase-prog-pct { font-family: 'Newsreader', serif; font-size: 1.1rem; font-weight: 600; color: var(--running); }
+    .phase-bars { display: flex; gap: 5px; height: 8px; }
+    .ph-bar { flex: 1; border-radius: 4px; }
+    .ph-bar.running { background: var(--running); }
+    .ph-bar.planned { background: var(--border); }
+    .ph-bar.target  { background: var(--target-soft); }
+    .phase-bar-labels { display: flex; gap: 5px; margin-top: 7px; }
+    .ph-bar-label { flex: 1; font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; color: var(--text-3); text-align: center; }
+
+    /* Dashboard charts */
+    .dash-chart-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .chart-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 20px;
+      box-shadow: var(--shadow);
+    }
+    .chart-card-label { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-3); margin-bottom: 14px; }
+    .chart-canvas-wrap { position: relative; height: 170px; }
+
+    /* ============================================================
+       PUBLICATIONS TABLE
+    ============================================================ */
+    .pub-table-wrap {
+      overflow-x: auto;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+    .pub-table { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
+    .pub-table thead { background: var(--card-alt); }
+    .pub-table th {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.59rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-3);
+      padding: 10px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+    .pub-table td {
+      padding: 13px 14px;
+      vertical-align: top;
+      border-bottom: 1px solid var(--border);
+      background: var(--card);
+    }
+    .pub-table tr:last-child td { border-bottom: none; }
+    .pub-table tbody tr:hover td { background: var(--card-alt); }
+    .pub-num { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; font-weight: 700; color: var(--accent); }
+    .pub-title-cell { min-width: 280px; }
+    .pub-title { font-weight: 600; color: var(--text); line-height: 1.4; margin-bottom: 3px; font-size: 0.85rem; }
+    .pub-contrib { font-size: 0.78rem; color: var(--text-3); line-height: 1.4; }
+    .pub-venue { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; font-weight: 500; color: var(--text-2); white-space: nowrap; }
+    .doi-link {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.62rem;
+      font-weight: 600;
+      color: var(--accent);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      white-space: nowrap;
+    }
+    .doi-link:hover { text-decoration: underline; }
+
+    /* ============================================================
+       RESEARCH QUESTIONS
+    ============================================================ */
+    .rq-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .rq-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+      border-left: 3px solid;
+      transition: box-shadow 0.2s;
+    }
+    .rq-card:hover { box-shadow: var(--shadow-md); }
+    .rq-c1 { border-left-color: var(--info); }
+    .rq-c2 { border-left-color: var(--warn); }
+    .rq-c3 { border-left-color: var(--running); }
+    .rq-id { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 9px; }
+    .rq-c1 .rq-id { color: var(--info); }
+    .rq-c2 .rq-id { color: var(--warn); }
+    .rq-c3 .rq-id { color: var(--running); }
+    .rq-q { font-family: 'Newsreader', serif; font-size: 0.95rem; font-weight: 600; font-style: italic; color: var(--text); line-height: 1.48; margin-bottom: 13px; }
+    .rq-tasks { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+    .rq-tasks li { font-size: 0.8rem; color: var(--text-2); line-height: 1.48; padding-left: 14px; position: relative; }
+    .rq-tasks li::before { content: '\2192'; position: absolute; left: 0; color: var(--text-3); font-size: 0.72rem; }
+
+    /* ============================================================
+       PAPERS IN PROGRESS
+    ============================================================ */
+    .papers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .paper-card {
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 10px;
       padding: 18px;
-    }
-
-    /* Approach Canvas Styling */
-    .approach-container {
+      box-shadow: var(--shadow);
       display: flex;
       flex-direction: column;
-      gap: 20px;
-      margin-top: 20px;
+      gap: 10px;
+      transition: box-shadow 0.2s;
     }
+    .paper-card:hover { box-shadow: var(--shadow-md); }
+    .paper-card-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+    .paper-id { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+    .paper-title { font-family: 'Newsreader', serif; font-size: 0.95rem; font-weight: 600; color: var(--text); line-height: 1.4; }
+    .paper-venue-row { font-family: 'JetBrains Mono', monospace; font-size: 0.67rem; color: var(--text-2); display: flex; align-items: center; gap: 5px; flex-wrap: wrap; }
+    .paper-focus { font-size: 0.8rem; color: var(--text-2); line-height: 1.58; flex: 1; }
+    .deadline-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.62rem;
+      font-weight: 600;
+      margin-top: auto;
+    }
+    .dl-urgent { background: var(--warn-soft); color: var(--warn); }
+    .dl-normal { background: var(--planned-soft); color: var(--planned); }
 
-    .approach-canvas-wrapper {
-      position: relative;
-      width: 100%;
-      height: 260px;
+    /* ============================================================
+       PHASE KANBAN BOARD
+    ============================================================ */
+    .kanban-board { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; align-items: start; }
+    .kanban-col {
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 10px;
       overflow: hidden;
       box-shadow: var(--shadow);
-      display: flex;
-      flex-direction: column;
     }
-
-    #approachCanvas {
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
-
-    .approach-controls {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-      margin-top: 8px;
-    }
-
-    .stage-btn {
-      background: var(--card);
+    .kanban-col.running { border-top: 3px solid var(--running); }
+    .kanban-col.planned { border-top: 3px solid var(--border-strong); }
+    .kanban-col.target  { border-top: 3px solid var(--target); }
+    .kanban-col-head { padding: 13px 14px 11px; border-bottom: 1px solid var(--border); }
+    .kanban-col.running .kanban-col-head { background: var(--running-soft); }
+    .kanban-col.planned .kanban-col-head { background: var(--card-alt); }
+    .kanban-col.target  .kanban-col-head { background: var(--target-soft); }
+    .k-phase-label { font-family: 'JetBrains Mono', monospace; font-size: 0.57rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-3); margin-bottom: 2px; }
+    .k-phase-name { font-family: 'Newsreader', serif; font-size: 0.9rem; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+    .k-phase-meta { display: flex; justify-content: space-between; align-items: center; gap: 4px; }
+    .k-period { font-family: 'JetBrains Mono', monospace; font-size: 0.57rem; color: var(--text-3); }
+    .kanban-tasks { padding: 10px; display: flex; flex-direction: column; gap: 7px; }
+    .k-task {
+      background: var(--panel);
       border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 12px 14px;
-      cursor: pointer;
-      text-align: left;
-      transition: all .2s ease;
+      border-radius: 7px;
+      padding: 10px 11px;
+      transition: box-shadow 0.15s;
     }
+    .k-task:hover { box-shadow: var(--shadow); }
+    .k-task-name { font-size: 0.8rem; font-weight: 500; color: var(--text); line-height: 1.38; margin-bottom: 7px; }
+    .k-task-footer { display: flex; align-items: center; justify-content: space-between; gap: 4px; flex-wrap: wrap; }
 
-    .stage-btn:hover {
-      border-color: var(--accent);
-      background: var(--card-alt);
-    }
-
-    .stage-btn.active {
-      border-color: var(--accent);
-      background: var(--accent-soft);
-      box-shadow: 0 0 0 1px var(--accent);
-    }
-
-    .stage-btn .st-num {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .68rem;
-      font-weight: 600;
-      color: var(--accent);
-      text-transform: uppercase;
-      display: block;
-      margin-bottom: 2px;
-    }
-
-    .stage-btn .st-title {
-      font-size: .9rem;
-      font-weight: 600;
-      color: var(--text);
-    }
-
-    /* Roadmap Timeline Styling */
-    .roadmap-controls {
+    /* ============================================================
+       ROADMAP
+    ============================================================ */
+    .roadmap-rail {
       display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-
-    .track-container {
-      display: flex;
-      justify-content: space-between;
+      align-items: flex-start;
       position: relative;
-      margin: 30px 0 35px;
-      padding: 0 10px;
+      padding: 22px 0 6px;
+      margin-bottom: 24px;
     }
-
-    .track-line {
+    .roadmap-rail::before {
+      content: '';
       position: absolute;
-      top: 18px;
-      left: 30px;
-      right: 30px;
-      height: 3px;
-      background: linear-gradient(90deg, var(--accent) 0%, var(--border) 100%);
-      z-index: 1;
+      top: 46px;
+      left: 24px;
+      right: 24px;
+      height: 2px;
+      background: var(--border);
     }
-
-    .track-node-wrapper {
+    .rm-node-wrap {
+      flex: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 8px;
+      cursor: pointer;
       position: relative;
-      z-index: 2;
     }
-
-    .track-node {
-      background: var(--card);
-      border: 2px solid var(--border);
+    .rm-node {
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
-      width: 40px;
-      height: 40px;
+      border: 2px solid;
       display: flex;
       align-items: center;
       justify-content: center;
+      position: relative;
+      z-index: 2;
+      transition: transform 0.2s;
       font-family: 'JetBrains Mono', monospace;
-      font-size: .85rem;
+      font-size: 0.72rem;
       font-weight: 700;
-      color: var(--text-2);
-      cursor: pointer;
-      transition: all .2s ease;
     }
+    .rm-node-wrap:hover .rm-node { transform: scale(1.08); }
+    .rm-node.running { border-color: var(--running); background: var(--running); color: #fff; }
+    .rm-node.planned { border-color: var(--border-strong); background: var(--card); color: var(--text-3); }
+    .rm-node.target  { border-color: var(--target); background: var(--card); color: var(--target); }
 
-    .track-node-wrapper .node-lbl {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .72rem;
-      font-weight: 600;
-      color: var(--text-3);
-      text-transform: uppercase;
+    @keyframes nodePulse {
+      0%   { box-shadow: 0 0 0 0 rgba(26,107,60,0.5); }
+      70%  { box-shadow: 0 0 0 13px rgba(26,107,60,0); }
+      100% { box-shadow: 0 0 0 0 rgba(26,107,60,0); }
     }
+    .rm-node.running { animation: nodePulse 2.2s ease-out infinite; }
 
-    .track-node:hover,
-    .track-node.active {
-      border-color: var(--accent);
-      color: var(--accent);
-      background: var(--accent-soft);
-      transform: scale(1.15);
-      box-shadow: 0 0 12px var(--accent-soft);
-    }
+    .rm-label { margin-top: 11px; text-align: center; padding: 0 3px; }
+    .rm-phase { font-family: 'JetBrains Mono', monospace; font-size: 0.57rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-3); margin-bottom: 2px; }
+    .rm-name { font-family: 'Newsreader', serif; font-size: 0.85rem; font-weight: 600; color: var(--text); line-height: 1.25; margin-bottom: 2px; }
+    .rm-period { font-family: 'JetBrains Mono', monospace; font-size: 0.57rem; color: var(--text-3); }
 
-    .phase-card {
-      display: none;
-      background: var(--card);
+    .roadmap-hint { font-size: 0.78rem; color: var(--text-3); font-style: italic; text-align: center; margin-bottom: 16px; }
+    .progress-block-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+    .progress-block-label { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-3); }
+    .progress-block-val { font-family: 'Newsreader', serif; font-size: 1rem; font-weight: 600; color: var(--running); }
+    .prog-track { height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
+    .prog-fill { height: 100%; background: var(--running); border-radius: 4px; transition: width 0.7s ease; }
+
+    /* ============================================================
+       SYSTEM ARCHITECTURE
+    ============================================================ */
+    .arch-flex {
+      display: flex;
+      align-items: stretch;
       border: 1px solid var(--border);
       border-radius: 10px;
-      padding: 24px;
-      animation: fadeIn .3s ease;
+      overflow: hidden;
+      box-shadow: var(--shadow);
     }
-
-    .phase-card.active-phase {
-      display: block;
+    .arch-stage {
+      flex: 1;
+      background: var(--card);
+      padding: 20px 16px;
+      border-right: 1px solid var(--border);
+      transition: background 0.15s;
     }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(6px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* Footer / Bottom Bar */
-    .bottombar {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 44px;
-      z-index: 100;
+    .arch-stage:last-child { border-right: none; }
+    .arch-stage:hover { background: var(--card-alt); }
+    .arch-connector {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding: 0 24px;
-      background: var(--panel);
-      border-top: 1px solid var(--border);
-      font-size: .8rem;
+      justify-content: center;
       color: var(--text-3);
+      min-width: 22px;
+      background: var(--card-alt);
+      border-right: 1px solid var(--border);
+      flex-shrink: 0;
+      font-size: 0.8rem;
     }
+    .arch-num { font-family: 'JetBrains Mono', monospace; font-size: 0.57rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+    .arch-name { font-family: 'Newsreader', serif; font-size: 0.9rem; font-weight: 600; color: var(--text); margin-bottom: 9px; line-height: 1.3; }
+    .arch-desc { font-size: 0.78rem; color: var(--text-2); line-height: 1.58; }
 
-    .folio {
-      font-family: 'JetBrains Mono', monospace;
+    /* ============================================================
+       COMMITTEE
+    ============================================================ */
+    .supervision-section { margin-bottom: 26px; }
+    .sub-heading { font-family: 'Newsreader', serif; font-size: 1rem; font-weight: 600; color: var(--text); margin-bottom: 12px; }
+    .sup-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 14px; }
+    .sup-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 13px 16px; }
+    .sup-role { font-family: 'JetBrains Mono', monospace; font-size: 0.59rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 3px; }
+    .sup-name { font-size: 0.87rem; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+    .sup-inst { font-size: 0.77rem; color: var(--text-3); }
+    .collab-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+    .collab-chip { padding: 4px 11px; background: var(--card-alt); border: 1px solid var(--border); border-radius: 20px; font-size: 0.8rem; color: var(--text-2); }
+
+    .committee-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+    .committee-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 20px 22px; box-shadow: var(--shadow); }
+    .committee-card-title {
+      font-family: 'Newsreader', serif;
+      font-size: 1rem;
       font-weight: 600;
+      color: var(--text);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .step-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .step-item { display: flex; gap: 10px; align-items: flex-start; }
+    .step-num {
+      flex-shrink: 0;
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.62rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1px;
+    }
+    .step-text { font-size: 0.83rem; color: var(--text-2); line-height: 1.58; }
+    .bullet-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .bullet-item { font-size: 0.83rem; color: var(--text-2); line-height: 1.55; padding-left: 14px; position: relative; }
+    .bullet-item::before { content: '\2192'; position: absolute; left: 0; color: var(--text-3); font-size: 0.72rem; }
+
+    .researcher-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px 26px; box-shadow: var(--shadow); }
+    .researcher-name { font-family: 'Newsreader', serif; font-size: 1.15rem; font-weight: 600; color: var(--text); margin-bottom: 3px; }
+    .researcher-role { font-size: 0.83rem; color: var(--text-2); margin-bottom: 14px; }
+    .researcher-links { display: flex; gap: 8px; flex-wrap: wrap; }
+    .researcher-link {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.62rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      padding: 5px 11px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--card-alt);
       color: var(--text-2);
+      text-decoration: none;
+      transition: all 0.15s;
+    }
+    .researcher-link:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 1200px) {
+      .kanban-board { grid-template-columns: repeat(2, 1fr); }
+      .arch-flex { flex-wrap: wrap; border-radius: 10px; }
+      .arch-stage { flex: 1 1 40%; }
+      .arch-connector { display: none; }
+    }
+    @media (max-width: 960px) {
+      .section { padding: 32px 28px 44px; }
+      .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+      .rq-grid { grid-template-columns: 1fr; }
+      .papers-grid { grid-template-columns: 1fr; }
+      .dash-chart-grid { grid-template-columns: 1fr; }
+      .committee-grid { grid-template-columns: 1fr; }
+      .sup-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 680px) {
+      .sidebar { display: none; }
+      .main { margin-left: 0; }
+      .topbar { padding-left: 16px; }
+      .kpi-grid { grid-template-columns: 1fr; }
+      .kanban-board { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 
 <body>
 
-  <!-- Top Bar -->
+  <!-- ====================================================
+       TOPBAR
+  ==================================================== -->
   <header class="topbar">
-    <div class="brand">
-      <span class="title-text">PhD Status & Research Roadmap</span>
-      <span class="tag">Bhupender Kumar Saini</span>
+    <div class="topbar-left">
+      <div class="topbar-title">PhD Research Dashboard</div>
+      <div class="topbar-sub">Bhupender Kumar Saini &middot; Fraunhofer IAO &middot; Stuttgart</div>
     </div>
-    <div class="tb-actions">
-      <button class="btn" id="tocBtn" title="Table of Contents (C)">&#9776; TOC</button>
-      <button class="btn" id="gridBtn" title="Grid Overview (G)">&#9638; Slides</button>
-      <button class="btn" id="themeBtn" title="Toggle Light/Dark Theme">&#9789; Light</button>
-      <button class="btn" id="fsBtn" title="Toggle Fullscreen">&#x26F6;</button>
-      <div style="width:1px; height:18px; background:var(--border); margin:0 4px;"></div>
-      <button class="btn" id="prevBtn" title="Previous Slide (Left Arrow)">&larr; Prev</button>
-      <button class="btn" id="nextBtn" title="Next Slide (Right Arrow or Space)">Next &rarr;</button>
+    <div class="topbar-actions">
+      <span class="updated-badge" id="updated-badge">Updated: —</span>
+      <button class="icon-btn" id="theme-btn" title="Toggle dark/light theme" aria-label="Toggle theme">
+        <span id="theme-icon">&#9789;</span>
+      </button>
     </div>
   </header>
 
-  <!-- Progress Bar -->
-  <div class="progress" id="progress"></div>
-
-  <!-- TOC Sidebar Drawer -->
-  <div class="toc-backdrop" id="tocBackdrop"></div>
-  <nav class="toc" id="toc">
-    <div class="toc-head">
-      <div>
-        <h3>PhD Status Overview</h3>
-        <div class="sub">Table of Contents</div>
-      </div>
-      <button class="btn" id="tocClose">&#10005;</button>
+  <!-- ====================================================
+       SIDEBAR
+  ==================================================== -->
+  <nav class="sidebar" aria-label="Research sections">
+    <div class="sb-brand">
+      <div class="sb-name">Bhupender Kumar Saini</div>
+      <div class="sb-role">Applied AI Researcher</div>
     </div>
-    <div class="toc-list" id="tocList"></div>
+    <div class="sb-nav" id="sb-nav"></div>
+    <div class="sb-footer">
+      <div class="sb-links">
+        <a href="https://www.bksaini.com/" target="_blank" rel="noopener" class="sb-link">Profile</a>
+        <a href="https://orcid.org/0000-0001-8218-5990" target="_blank" rel="noopener" class="sb-link">ORCID</a>
+        <a href="https://linkedin.com/in/bksaini078" target="_blank" rel="noopener" class="sb-link">LinkedIn</a>
+        <a href="https://github.com/bksaini078" target="_blank" rel="noopener" class="sb-link">GitHub</a>
+      </div>
+    </div>
   </nav>
 
-  <!-- Slide Grid Quick Jump Modal -->
-  <div class="grid-modal" id="gridModal">
-    <div class="grid-modal-content">
-      <div class="grid-modal-head">
-        <h3>PhD Slide Deck Overview</h3>
-        <button class="btn" id="gridCloseBtn">&#10005; Close</button>
-      </div>
-      <div class="slide-thumbnails-grid" id="thumbGrid"></div>
-    </div>
-  </div>
+  <!-- ====================================================
+       MAIN
+  ==================================================== -->
+  <main class="main">
 
-  <div class="deck" id="deck">
-
-    <!-- SLIDE 1 -->
-    <section class="slide active" data-title="PhD Overview & Status" data-chapter="Part I: Current Status">
-      <div class="wrap">
-        <div class="eyebrow">PhD Research Status & Roadmap</div>
-        <h1>Human Digital Twins for Enterprise Decision Support: Platform Validation & Data Economy</h1>
-        <p class="lead">A doctoral status report outlining our 5 peer-reviewed publications, system prototype, and a grounded roadmap targeting completion by Mid 2027.</p>
-
-        <div class="grid-3" style="margin-top:28px;">
-          <div class="stat">
-            <div class="num">5 Peer-Reviewed Publications</div>
-            <div class="lbl">2 Full Conference Papers, 2 Extended Abstracts (ACM), and 1 Springer Book Chapter</div>
+    <!-- 00 Dashboard -->
+    <section class="section" id="sec-dashboard">
+      <div class="section-inner">
+        <div class="section-eyebrow">00 &middot; Overview</div>
+        <h1 class="section-title">Research Dashboard</h1>
+        <p class="section-lead" id="dash-lead"></p>
+        <div class="kpi-grid" id="kpi-grid"></div>
+        <div class="phase-prog-card">
+          <div class="phase-prog-head">
+            <span class="phase-prog-label">Thesis Phase Progress</span>
+            <span class="phase-prog-pct" id="prog-pct">—</span>
           </div>
-          <div class="stat">
-            <div class="num">Twinlytics Prototype</div>
-            <div class="lbl">Functional web application prototype developed for user modeling and market research simulation</div>
-          </div>
-          <div class="stat">
-            <div class="num">3 Target Studies</div>
-            <div class="lbl">1. Distortion Study (Running) &middot; 2. Requirements & System Evaluation &middot; 3. Digital Twin Use Cases & Twin Economics</div>
-          </div>
+          <div class="phase-bars" id="phase-bars"></div>
+          <div class="phase-bar-labels" id="phase-bar-labels"></div>
         </div>
-
-        <div class="callout">
-          <p><strong>Researcher:</strong> Bhupender Kumar Saini &middot; Fraunhofer IAO & University Partner<br>
-            <strong>Primary Supervisors:</strong> Prof. Dr. Katharina Hölzle & Prof. Dr. Kai Arras (Institute for Artificial Intelligence, Socially Intelligent Robotics Lab)<br>
-            <strong>Co-Supervisors & Collaborators:</strong> Prof. Dr. Matthias Peissner, Dr. Chandan Kumar, Leonie Isabel Gürtler, Daniel Auspurg<br>
-            <strong>Research Focus:</strong> Human Digital Twins, Market Research Simulation, Stakeholder Requirements, and Behavioral Data Markets.
-          </p>
+        <div class="dash-chart-grid">
+          <div class="chart-card">
+            <div class="chart-card-label">Publication Types</div>
+            <div class="chart-canvas-wrap"><canvas id="chart-types"></canvas></div>
+          </div>
+          <div class="chart-card">
+            <div class="chart-card-label">Publications by Venue</div>
+            <div class="chart-canvas-wrap"><canvas id="chart-venues"></canvas></div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- SLIDE 2 -->
-    <section class="slide" data-title="Published Research Baseline (5 Publications)" data-chapter="Part I: Current Status">
-      <div class="wrap">
-        <div class="eyebrow">Publication Baseline</div>
-        <h2>Published Research Baseline (5 Peer-Reviewed Publications)</h2>
-        <p class="lead">Our research baseline comprises 5 peer-reviewed contributions (2 full conference papers, 2 extended abstracts, and 1 book chapter) establishing foundational methodology in agent contextualization, persona simulation, and dynamic user modeling.</p>
-
-        <div class="table-wrap" style="margin-top:20px;">
-          <table>
+    <!-- 01 Publications -->
+    <section class="section" id="sec-publications">
+      <div class="section-inner">
+        <div class="section-eyebrow">01 &middot; Publications</div>
+        <h2 class="section-title">Published Work</h2>
+        <p class="section-lead">
+          The doctoral thesis builds on five peer-reviewed publications completed between 2024 and 2026.
+          These papers establish the empirical and theoretical base for the remaining research.
+        </p>
+        <div class="pub-table-wrap">
+          <table class="pub-table" id="pub-table">
             <thead>
               <tr>
-                <th>Title</th>
-                <th>Venue / Format</th>
-                <th>Status / DOI</th>
-                <th>Core Contribution</th>
+                <th>#</th>
+                <th>Title and Contribution</th>
+                <th>Venue</th>
+                <th>Type</th>
+                <th>Status</th>
+                <th>DOI</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td><strong>A Human-Centered Interaction Framework for Multi-agent AI Reasoning in Enterprise
-                    Decision-Making</strong></td>
-                <td>Book Chapter (Springer Series, 2026)</td>
-                <td><span class="badge b-good">Published &middot; 10.1007/978-3-032-29586-6_28</span></td>
-                <td>Framework for multi-agent LLM reasoning in enterprise decisions.</td>
-              </tr>
-              <tr>
-                <td><strong>DUPLet: Dynamic User Modeling for Personalized Cover Letter Generation</strong></td>
-                <td>Extended Abstract (ACM UMAP 2026: 34th ACM International Conference on User Modeling, Adaptation and
-                  Personalization | June 2026)</td>
-                <td><span class="badge b-good">Published &middot; 10.1145/3774935.3812726</span></td>
-                <td>Dynamic user state modeling and personal signal extraction.</td>
-              </tr>
-              <tr>
-                <td><strong>Virtual User Lab: An Interactive System for Simulating User Perspectives with AI Personas
-                    for Ideation and Evaluation</strong></td>
-                <td>Full Conference Proceeding (ACM UMAP 2026: 34th ACM International Conference on User Modeling, Adaptation
-                  and Personalization | June 2026)</td>
-                <td><span class="badge b-good">Published &middot; 10.1145/3774935.3812731</span></td>
-                <td>Interactive persona lab for simulated user panels in ideation.</td>
-              </tr>
-              <tr>
-                <td><strong>Simulation of Human Survey Responses for Market Research: The Role of Contextualization in
-                    LLM-Based Agents</strong></td>
-                <td>Extended Abstract (ACM CHI 2026: ACM Conference on Human Factors in Computing Systems | April 2026)</td>
-                <td><span class="badge b-good">Published &middot; 10.1145/3772363.3798991</span></td>
-                <td>Empirical proof of LLM contextualization reducing survey skew.</td>
-              </tr>
-              <tr class="hl">
-                <td><strong>Toward AI-Supported Decision Making in Innovation: Requirements and design of LLM-based
-                    multi-agent systems</strong></td>
-                <td>Full Conference Proceeding (IPDMC 2026: 33rd Innovation and Product Development Management Conference | June 2026)
-                </td>
-                <td><span class="badge b-good">Published Paper</span></td>
-                <td>Requirements engineering for LLM multi-agent decision support systems.</td>
-              </tr>
-            </tbody>
+            <tbody id="pub-tbody"></tbody>
           </table>
         </div>
+      </div>
+    </section>
 
-        <div class="callout good" style="margin-top:18px;">
-          <p><strong>Research Foundation:</strong> These 5 peer-reviewed contributions establish the methodological stepping stones for our ongoing PhD work: contextual agent prompting, interactive persona simulation, and dynamic user state modeling.</p>
+    <!-- 02 Research Questions -->
+    <section class="section" id="sec-rqs">
+      <div class="section-inner">
+        <div class="section-eyebrow">02 &middot; Research Questions</div>
+        <h2 class="section-title">Core Research Questions</h2>
+        <p class="section-lead">
+          The thesis is structured around three research questions.
+          Each question targets a distinct layer of the problem: technical correctness, practical utility, and economic viability.
+          Each question corresponds to one planned publication.
+        </p>
+        <div class="rq-grid" id="rq-grid"></div>
+      </div>
+    </section>
+
+    <!-- 03 Papers In Progress -->
+    <section class="section" id="sec-papers">
+      <div class="section-inner">
+        <div class="section-eyebrow">03 &middot; Planned Submissions</div>
+        <h2 class="section-title">Papers In Progress</h2>
+        <p class="section-lead">
+          Three original papers are planned to complete the thesis.
+          Each paper addresses one research question.
+          Deadlines marked in orange are within 60 days of today.
+        </p>
+        <div class="papers-grid" id="papers-grid"></div>
+      </div>
+    </section>
+
+    <!-- 04 Phase Board -->
+    <section class="section" id="sec-kanban">
+      <div class="section-inner">
+        <div class="section-eyebrow">04 &middot; Phase Board</div>
+        <h2 class="section-title">PhD Phase Board</h2>
+        <p class="section-lead">
+          Each column represents one thesis phase.
+          Phase 1 is currently active.
+          All other phases are planned.
+          Clicking a node on the Roadmap scrolls here and highlights the corresponding column.
+        </p>
+        <div class="kanban-board" id="kanban-board"></div>
+      </div>
+    </section>
+
+    <!-- 05 Roadmap -->
+    <section class="section" id="sec-roadmap">
+      <div class="section-inner">
+        <div class="section-eyebrow">05 &middot; Roadmap</div>
+        <h2 class="section-title">Research Roadmap</h2>
+        <p class="section-lead">
+          The four phases of the doctoral program from Q3 2026 to mid 2027.
+          The active phase has a green node with a pulse animation.
+          Click any node to jump to the Phase Board.
+        </p>
+        <div class="roadmap-rail" id="roadmap-rail"></div>
+        <p class="roadmap-hint">Click a phase node to jump to the Phase Board and highlight that column.</p>
+        <div class="progress-block-head">
+          <span class="progress-block-label">Overall Progress</span>
+          <span class="progress-block-val" id="rm-pct">—</span>
+        </div>
+        <div class="prog-track">
+          <div class="prog-fill" id="rm-fill" style="width:0%"></div>
         </div>
       </div>
     </section>
 
-    <!-- SLIDE 3 -->
-    <section class="slide" data-title="Research Scope & Core Vision" data-chapter="Part II: Vision">
-      <div class="wrap">
-        <div class="eyebrow">PhD Scope</div>
-        <h2>Human Digital Twins for Enterprise Decision Support</h2>
-        <p class="lead">Shifting from static personas toward dynamic, interactive human digital twins grounded in
-          authentic personal behavioral data for market research.</p>
-
-        <div class="grid-3" style="margin-top:24px;">
-          <div class="card">
-            <span class="tick">Pillar 01 &middot; Contextual Grounding</span>
-            <h4>Contextual Human Digital Twins</h4>
-            <p>Grounding AI agents in real user reflective notes and survey history to produce authentic, nuanced
-              decision responses instead of generic LLM outputs.</p>
-          </div>
-
-          <div class="card">
-            <span class="tick">Pillar 02 &middot; Stakeholder Utility</span>
-            <h4>Enterprise Platform Validation</h4>
-            <p>Investigating explicit stakeholder requirements, workflow integration, and empirically validating that
-              synthetic twin platforms solve a problem worth solving.</p>
-          </div>
-
-          <div class="card">
-            <span class="tick">Pillar 03 &middot; Data Economy</span>
-            <h4>Consented Data Marketplace</h4>
-            <p>Creating a privacy-preserving behavioral data economy where users own their personal digital twins and
-              earn automated payouts for participating in research.</p>
-          </div>
-        </div>
+    <!-- 06 Architecture -->
+    <section class="section" id="sec-architecture">
+      <div class="section-inner">
+        <div class="section-eyebrow">06 &middot; System Artifact</div>
+        <h2 class="section-title">Twinlytics Platform</h2>
+        <p class="section-lead">
+          Twinlytics is the software artifact developed as part of this research.
+          It implements a four-stage human digital twin pipeline.
+          The platform serves as the primary testbed for all empirical evaluations in the thesis.
+        </p>
+        <div class="arch-flex" id="arch-flex"></div>
       </div>
     </section>
 
-    <!-- SLIDE 4 -->
-    <section class="slide" data-title="Core Research Questions" data-chapter="Part II: Vision">
-      <div class="wrap">
-        <div class="eyebrow">Research Questions</div>
-        <h2>Three Focused Research Questions (RQ1 - RQ3)</h2>
-        <p class="lead">Structuring the remaining PhD roadmap around technical distortions, stakeholder requirements, and digital twin market economics.</p>
+    <!-- 07 Committee -->
+    <section class="section" id="sec-committee">
+      <div class="section-inner">
+        <div class="section-eyebrow">07 &middot; Committee</div>
+        <h2 class="section-title">Supervision and Next Steps</h2>
+        <p class="section-lead">
+          This section records the supervisory committee, the immediate action items for the next three months,
+          and the open topics for the next committee meeting.
+        </p>
 
-        <div class="grid-3" style="margin-top:24px;">
-          <div class="card">
-            <span class="tick">RQ1 &middot; Technical Distortions</span>
-            <h4>What systematic response distortions and biases emerge in LLM persona simulation, and how can they be mitigated?</h4>
-            <p>Quantifying prompt sensitivity, cognitive bias propagation, and hallucination bounds in simulated survey responses to establish reliability guidelines.</p>
-          </div>
-
-          <div class="card">
-            <span class="tick">RQ2 &middot; Requirements & Evaluation</span>
-            <h4>What are enterprise stakeholder requirements, and how does Twinlytics perform compared to traditional panels?</h4>
-            <p>Empirically evaluating decision speed, confidence, insight quality, and workflow integration through 15-20 stakeholder interviews and a comparative pilot.</p>
-          </div>
-
-          <div class="card">
-            <span class="tick">RQ3 &middot; Twin Economics & Use Cases</span>
-            <h4>What new business values, market opportunities, and economic viability model emerge from human-controlled AI twins?</h4>
-            <p>Formalizing digital twin use cases, market creation opportunities, value capture architectures, and twin economy feasibility.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SLIDE 5 -->
-    <section class="slide" data-title="Platform Architecture & Prototype" data-chapter="Part III: Artifact">
-      <div class="wrap">
-        <div class="eyebrow">System Artifact</div>
-        <h2>Twinlytics Platform Architecture</h2>
-        <p class="lead">The Twinlytics web application serves as our functional research prototype for user modeling and market simulation.</p>
-
-        <div class="approach-container">
-          <div class="approach-canvas-wrapper">
-            <canvas id="approachCanvas"></canvas>
-          </div>
-
-          <div class="approach-controls">
-            <button class="stage-btn active" data-stage="0">
-              <span class="st-num">Stage 01</span>
-              <span class="st-title">User Signal Ingestion</span>
-            </button>
-            <button class="stage-btn" data-stage="1">
-              <span class="st-num">Stage 02</span>
-              <span class="st-title">Twin Memory Engine</span>
-            </button>
-            <button class="stage-btn" data-stage="2">
-              <span class="st-num">Stage 03</span>
-              <span class="st-title">Simulation Orchestrator</span>
-            </button>
-            <button class="stage-btn" data-stage="3">
-              <span class="st-num">Stage 04</span>
-              <span class="st-title">Analytics & Revenue</span>
-            </button>
-          </div>
-
-          <div class="callout" id="approachDetail">
-            <p><strong>Stage 1: User Signal Ingestion:</strong> Individuals contribute reflective notes, survey history,
-              and behavioral choices. Data is encrypted client-side and owned exclusively by the user.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SLIDE 6 -->
-    <section class="slide" data-title="Planned Paper 1: Distortion Study (Running)" data-chapter="Part IV: Planned Research">
-      <div class="wrap">
-        <div class="eyebrow">Planned Paper 1 &middot; Currently Running &middot; Target: ACM UMAP 2027 / ACM CHI 2027</div>
-        <h2>Technical Distortion Analysis & Mitigation in LLM Persona Simulation</h2>
-        <p class="lead">Quantifying systematic distortions, prompt sensitivity, and hallucination bounds in simulated survey responses to establish technical guidelines for reliable digital twin inference.</p>
-
-        <div class="grid-2" style="margin-top:24px;">
-          <div class="card">
-            <span class="tick">Study Part A</span>
-            <h4>Distortion & Bias Taxonomy</h4>
-            <p>Categorizing cognitive bias propagation, response skew, and contextual grounding loss across varied LLM-simulated survey panels.</p>
-          </div>
-
-          <div class="card">
-            <span class="tick">Study Part B</span>
-            <h4>Technical Mitigation Strategies</h4>
-            <p>Evaluating contextual prompt framing, dynamic memory retrieval, and grounding bounds to minimize response variance and distortion.</p>
-          </div>
+        <div class="supervision-section">
+          <div class="sub-heading">Primary Supervisors</div>
+          <div class="sup-grid" id="sup-grid"></div>
+          <div class="sub-heading" style="margin-top:16px;">Collaborators</div>
+          <div class="collab-chips" id="collab-chips"></div>
         </div>
 
-        <div class="callout good" style="margin-top:18px;">
-          <p><strong>Status:</strong> Currently Running &middot; <strong>Primary Target:</strong> ACM IUI 2027 (32nd ACM Conference on Intelligent User Interfaces | Helsinki | Feb 8–11, 2027 | <strong>Submission Deadline: Aug 20, 2026</strong>) &middot; <strong>Alternatives:</strong> ACM CHI 2027 (Sub: Sep 10, 2026) / ACM UMAP 2027 (Sub: Jan 25, 2027)</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- SLIDE 7 -->
-    <section class="slide" data-title="Planned Paper 2: Requirements & Platform Evaluation" data-chapter="Part IV: Planned Research">
-      <div class="wrap">
-        <div class="eyebrow">Planned Paper 2 &middot; Target: ACM CHI 2027 (April 2027)</div>
-        <h2>Requirement Gathering & Twinlytics Platform Evaluation</h2>
-        <p class="lead">Understanding stakeholder needs through semi-structured interviews (n=15-20) and a comparative empirical pilot study evaluating Twinlytics against traditional panel methods.</p>
-
-        <div class="grid-3" style="margin-top:22px;">
-          <div class="card">
-            <span class="tick">Study Part A</span>
-            <h4>Stakeholder Needs Analysis</h4>
-            <p>15-20 semi-structured interviews with enterprise innovation managers and market researchers to establish basic workflow expectations and feature priorities.</p>
-          </div>
-
-          <div class="card">
-            <span class="tick">Study Part B</span>
-            <h4>Empirical Pilot Study</h4>
-            <p>A controlled comparative evaluation testing Twinlytics alongside traditional market research panels, measuring decision speed, confidence, and insight quality.</p>
-          </div>
-
-          <div class="card">
-            <span class="tick">Study Part C</span>
-            <h4>System Evaluation & Metrics</h4>
-            <p>Translating pilot findings into actionable enterprise benchmarks and system evaluation metrics for synthetic user simulation.</p>
-          </div>
-        </div>
-
-        <div class="callout" style="margin-top:18px;">
-          <p><strong>Primary Target:</strong> ACM CHI 2027: 32nd ACM Conference on Human Factors in Computing Systems (April 24–29, 2027 | <strong>Submission Deadline: Sep 10, 2026</strong>) &middot; <strong>Alternative:</strong> ACM DIS 2027 (Stockholm | June 28–July 2, 2027 | <strong>Sub: Jan 18, 2027</strong>)</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- SLIDE 8 -->
-    <section class="slide" data-title="Planned Paper 3: Twin Use Cases & Twin Economics" data-chapter="Part IV: Planned Research">
-      <div class="wrap">
-        <div class="eyebrow">Planned Paper 3 &middot; Target: IPDMC 2027 (June 2027)</div>
-        <h2>Human Digital Twin Use Cases, Business Value & Twin Economics</h2>
-        <p class="lead">Exploring future use cases of human digital twins, new market opportunities and business value creation, alongside the economic viability and technical feasibility of a human-controlled twin economy.</p>
-
-        <div class="grid-2" style="margin-top:24px;">
-          <div class="card">
-            <span class="tick">Pillar 01</span>
-            <h4>Use Cases & Market Opportunities</h4>
-            <p>Mapping novel enterprise and consumer use cases where human digital twins create new business values and open new market opportunities.</p>
-          </div>
-
-          <div class="card">
-            <span class="tick">Pillar 02</span>
-            <h4>Twin Economy Viability & Feasibility</h4>
-            <p>Assessing economic viability, user data control mechanisms, micro-licensing frameworks, and value distribution models in a human-controlled twin economy.</p>
-          </div>
-        </div>
-
-        <div class="callout" style="margin-top:18px;">
-          <p><strong>Primary Target:</strong> ECIS 2027: 35th European Conference on Information Systems (Luxembourg | May 24–26, 2027 | <strong>Submission Deadline: Nov 20, 2026</strong>) &middot; <strong>Alternative:</strong> IPDMC 2027 (June 2027 | <strong>Sub: Jan 20, 2027</strong>)</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- SLIDE 9 -->
-    <section class="slide" data-title="PhD Execution Roadmap (2026 - Mid 2027)" data-chapter="Part VI: Execution Plan">
-      <div class="wrap">
-        <div class="eyebrow">Publication Roadmap</div>
-        <h2>Streamlined PhD Execution Roadmap</h2>
-        <p class="lead">Clear execution timeline focusing on stakeholder evaluation, business model formalization, and
-          thesis synthesis.</p>
-
-        <div class="roadmap-controls">
-          <button class="btn active" id="btnPhaseView">Phase View</button>
-          <button class="btn" id="btnMatrixView">Matrix View</button>
-        </div>
-
-        <!-- Phase View -->
-        <div id="roadmapPhaseView">
-          <div class="track-line"></div>
-          <div class="track-container">
-            <div class="track-node-wrapper">
-              <div class="track-node active" data-phase="1">P1</div>
-              <span class="node-lbl">Running</span>
+        <div class="committee-grid">
+          <div class="committee-card">
+            <div class="committee-card-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <polyline points="9 11 12 14 22 4"/>
+                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+              </svg>
+              Next Steps (3 months)
             </div>
-            <div class="track-node-wrapper">
-              <div class="track-node" data-phase="2">P2</div>
-              <span class="node-lbl">Late 2026</span>
-            </div>
-            <div class="track-node-wrapper">
-              <div class="track-node" data-phase="3">P3</div>
-              <span class="node-lbl">Early 2027</span>
-            </div>
-            <div class="track-node-wrapper">
-              <div class="track-node" data-phase="4">P4</div>
-              <span class="node-lbl">Mid 2027</span>
-            </div>
+            <ol class="step-list" id="next-steps-list"></ol>
           </div>
-
-          <div class="phase-card active-phase" id="pc1">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-              <h4 style="margin:0;">Phase 1: Technical Distortion Analysis (Paper 1)</h4>
-              <span class="badge b-acc">Currently Running &middot; Q3 2026</span>
+          <div class="committee-card">
+            <div class="committee-card-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="8" x2="12" y2="12"/>
+                <line x1="12" y1="16" x2="12.01" y2="16"/>
+              </svg>
+              Committee Discussion Topics
             </div>
-            <ul class="bullets">
-              <li><strong>Focus:</strong> Quantifying systematic response distortions, prompt sensitivity, cognitive bias propagation, and hallucination bounds in LLM-simulated survey panels.</li>
-              <li><strong>Key Target Submissions:</strong> **ACM IUI 2027** *(Submission Deadline: Aug 20, 2026 | Conference: Feb 8–11, 2027 in Helsinki)* &middot; **ACM CHI 2027** *(Submission Deadline: Sep 10, 2026)*.</li>
-            </ul>
-          </div>
-
-          <div class="phase-card" id="pc2">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-              <h4 style="margin:0;">Phase 2: Requirements & Twinlytics Evaluation (Paper 2)</h4>
-              <span class="badge b-good">Planned &middot; Remaining 2026 (Q3 - Q4 2026)</span>
-            </div>
-            <ul class="bullets">
-              <li><strong>Focus:</strong> 15–20 semi-structured stakeholder interviews + comparative empirical pilot evaluation of Twinlytics vs traditional survey panels.</li>
-              <li><strong>Key Target Submissions:</strong> **ECIS 2027** *(Sub: Nov 20, 2026 | Conf: May 2027 in Luxembourg)* &middot; **ACM DIS 2027** *(Sub: Jan 18, 2027 | Conf: June 2027)* &middot; **ACM UMAP 2027** *(Sub: Jan 25, 2027)*.</li>
-            </ul>
-          </div>
-
-          <div class="phase-card" id="pc3">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-              <h4 style="margin:0;">Phase 3: Digital Twin Use Cases & Twin Economics (Paper 3)</h4>
-              <span class="badge b-warn">Planned &middot; Early 2027 (Q1 - Q2 2027)</span>
-            </div>
-            <ul class="bullets">
-              <li><strong>Focus:</strong> Mapping novel enterprise market opportunities, new business values, user-controlled data sharing mechanisms, and economic viability of a digital twin economy.</li>
-              <li><strong>Key Target Submissions:</strong> **IPDMC 2027** *(Sub: Jan 20, 2027 | Conf: June 2027)* / Top Information & Innovation Management Venues.</li>
-            </ul>
-          </div>
-
-          <div class="phase-card" id="pc4">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-              <h4 style="margin:0;">Phase 4: Thesis Assembly, Synthesis & Oral Defense</h4>
-              <span class="badge b-good">Final Goal &middot; Mid 2027</span>
-            </div>
-            <ul class="bullets">
-              <li><strong>Focus:</strong> Collate published and submitted papers into a cohesive cumulative doctoral thesis.</li>
-              <li><strong>Synthesis Chapters:</strong> Draft overarching introduction, literature review, cross-study synthesis, and future research outlook.</li>
-              <li><strong>Committee Review:</strong> Alignment with supervisors (Prof. Dr. Katharina Hölzle, Prof. Dr. Kai Arras, Prof. Dr. Matthias Peissner, Dr. Chandan Kumar) & final oral defense.</li>
-            </ul>
+            <ul class="bullet-list" id="committee-list"></ul>
           </div>
         </div>
 
-        <!-- Matrix View -->
-        <div id="roadmapMatrixView" style="display:none; margin-top:20px;">
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Phase</th>
-                  <th>Timeline</th>
-                  <th>Tasks & Deliverables</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><strong>Phase 1</strong></td>
-                  <td>Q3 2026 (Running)</td>
-                  <td>Distortions study (Paper 1); Target: ACM IUI (Sub: Aug 20, 2026) / ACM CHI (Sub: Sep 10, 2026)</td>
-                  <td><span class="badge b-acc">Currently Running</span></td>
-                </tr>
-                <tr>
-                  <td><strong>Phase 2</strong></td>
-                  <td>Q3 - Q4 2026</td>
-                  <td>Requirements interviews (n=15-20) & Twinlytics pilot (Paper 2); Target: ECIS (Sub: Nov 20) / ACM DIS / UMAP (Sub: Jan 2027)</td>
-                  <td><span class="badge b-good">Planned 2026</span></td>
-                </tr>
-                <tr>
-                  <td><strong>Phase 3</strong></td>
-                  <td>Q1 - Q2 2027</td>
-                  <td>Digital twin use cases, market opportunities & twin economics feasibility (Paper 3); Target: IPDMC (Sub: Jan 20, 2027)</td>
-                  <td><span class="badge b-warn">Planned 2027</span></td>
-                </tr>
-                <tr class="hl">
-                  <td><strong>Phase 4</strong></td>
-                  <td>Mid 2027</td>
-                  <td>Cumulative thesis synthesis, committee review, and oral dissertation defense</td>
-                  <td><span class="badge b-good">Final Goal</span></td>
-                </tr>
-              </tbody>
-            </table>
+        <div class="researcher-card">
+          <div class="researcher-name">Bhupender Kumar Saini</div>
+          <div class="researcher-role">Applied AI Researcher, Fraunhofer IAO, Stuttgart, Germany. Doctoral Candidate.</div>
+          <div class="researcher-links">
+            <a href="https://www.bksaini.com/" target="_blank" rel="noopener" class="researcher-link">Profile</a>
+            <a href="https://orcid.org/0000-0001-8218-5990" target="_blank" rel="noopener" class="researcher-link">ORCID 0000-0001-8218-5990</a>
+            <a href="https://linkedin.com/in/bksaini078" target="_blank" rel="noopener" class="researcher-link">LinkedIn</a>
+            <a href="https://github.com/bksaini078" target="_blank" rel="noopener" class="researcher-link">GitHub</a>
+            <a href="mailto:bksaini078@gmail.com" class="researcher-link">Email</a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- SLIDE 10 -->
-    <section class="slide" data-title="PhD Status Summary & Next Steps" data-chapter="Part VI: Execution Plan">
-      <div class="wrap">
-        <div class="eyebrow">Conclusion</div>
-        <h2>PhD Status Summary & Immediate Next Steps</h2>
-        <p class="lead">Key takeaways for committee review and action items for the upcoming quarter.</p>
-
-        <div class="grid-2" style="margin-top:22px;">
-          <div class="card">
-            <span class="tick">Status Overview</span>
-            <h4>What Has Been Achieved</h4>
-            <ul class="bullets" style="margin-top:8px;">
-              <li><strong>Track Record:</strong> 5 peer-reviewed publications (2 Full Papers, 2 Extended Abstracts, 1 Book Chapter).</li>
-              <li><strong>System Prototype:</strong> Functional Twinlytics web application prototype for user simulation.</li>
-              <li><strong>Methodological Baseline:</strong> Contextual prompting, persona simulation, and dynamic user
-                modeling.</li>
-            </ul>
-          </div>
-
-          <div class="card">
-            <span class="tick">Action Items</span>
-            <h4>Next Steps (Next 3 Months)</h4>
-            <ul class="bullets" style="margin-top:8px;">
-              <li><strong>Step 01:</strong> Complete experiment analysis and manuscript for currently running Distortions Study (Paper 1).</li>
-              <li><strong>Step 02:</strong> Launch stakeholder requirement interviews (n=15-20) & Twinlytics pilot study (Paper 2).</li>
-              <li><strong>Step 03:</strong> Formalize human digital twin use case mapping and twin economics feasibility framework (Paper 3).</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="callout" style="margin-top:22px;">
-          <p><strong>Discussion Topics for Committee:</strong> Refinement of interview guide protocols, selecting secondary target tracks for ACM CHI 2027 vs ACM UMAP 2027, and finalizing data-sharing governance models for Paper 3.</p>
-        </div>
-      </div>
-    </section>
-
-  </div>
-
-  <!-- Bottom Bar -->
-  <footer class="bottombar">
-    <div>Fraunhofer IAO &middot; Human Digital Twins Research</div>
-    <div class="folio" id="folio">01 / 10</div>
-    <div>Use Arrow Keys, Spacebar, or TOC to navigate</div>
-  </footer>
+  </main>
 
   <script>
-    (function () {
-      const slides = Array.from(document.querySelectorAll('.slide'));
-      const total = slides.length;
-      let current = 0;
-      let chartsDone = false;
-      let charts = [];
+    /* ============================================================
+       DATA OBJECT
+       Edit entries in the arrays and objects below to update the page.
+       Do not modify render functions unless adding new data fields.
+    ============================================================ */
+    const DATA = {
+      meta: {
+        title: "Human Digital Twins for Enterprise Decision Support",
+        subtitle: "Platform Validation and Data Economy",
+        candidate: "Bhupender Kumar Saini",
+        institution: "Fraunhofer IAO, Stuttgart",
+        completion: "Mid 2027",
+        updated: "July 2026",
+        current_phase_id: 1,
+        progress_pct: 22
+      },
 
-      const progress = document.getElementById('progress');
-      const folio = document.getElementById('folio');
-      const tocList = document.getElementById('tocList');
-      const toc = document.getElementById('toc');
-      const backdrop = document.getElementById('tocBackdrop');
-      const prevBtn = document.getElementById('prevBtn');
-      const nextBtn = document.getElementById('nextBtn');
+      supervision: {
+        primary: [
+          {
+            name: "Prof. Dr. Katharina H\u00f6lzle",
+            role: "Primary Supervisor",
+            institution: "Fraunhofer IAO, University Partner"
+          },
+          {
+            name: "Prof. Dr. Kai Arras",
+            role: "Primary Supervisor",
+            institution: "Institute for AI, Socially Intelligent Robotics Lab"
+          }
+        ],
+        secondary: [
+          { name: "Prof. Dr. Matthias Peissner" },
+          { name: "Dr. Chandan Kumar" },
+          { name: "Leonie Isabel G\u00fcrtler" },
+          { name: "Daniel Auspurg" }
+        ]
+      },
 
-      // Build TOC & Thumbnails Grid
-      const thumbGrid = document.getElementById('thumbGrid');
-      let lastChapter = '';
-
-      slides.forEach((s, i) => {
-        const chapter = s.dataset.chapter;
-        if (chapter && chapter !== lastChapter) {
-          const c = document.createElement('div');
-          c.className = 'toc-chapter';
-          c.textContent = chapter;
-          tocList.appendChild(c);
-          lastChapter = chapter;
+      publications: [
+        {
+          id: 1,
+          title: "A Human-Centered Interaction Framework for Multi-agent AI Reasoning in Enterprise Decision-Making",
+          venue: "Springer Book Chapter",
+          venue_short: "Springer",
+          type: "Book Chapter",
+          status: "Published",
+          doi: "10.1007/978-3-032-29586-6_28",
+          contribution: "Multi-agent LLM reasoning framework for enterprise decision support."
+        },
+        {
+          id: 2,
+          title: "DUPLet: Dynamic User Modeling for Personalized Cover Letter Generation",
+          venue: "ACM UMAP 2026",
+          venue_short: "UMAP",
+          type: "Extended Abstract",
+          status: "Published",
+          doi: "10.1145/3774935.3812726",
+          contribution: "Dynamic user state modeling and personal signal extraction."
+        },
+        {
+          id: 3,
+          title: "Virtual User Lab: An Interactive System for Simulating User Perspectives with AI Personas for Ideation and Evaluation",
+          venue: "ACM UMAP 2026",
+          venue_short: "UMAP",
+          type: "Full Paper",
+          status: "Published",
+          doi: "10.1145/3774935.3812731",
+          contribution: "Interactive persona lab for simulated user panels in ideation tasks."
+        },
+        {
+          id: 4,
+          title: "Simulation of Human Survey Responses for Market Research: The Role of Contextualization in LLM-Based Agents",
+          venue: "ACM CHI 2026",
+          venue_short: "CHI",
+          type: "Extended Abstract",
+          status: "Published",
+          doi: "10.1145/3772363.3798991",
+          contribution: "Empirical proof that LLM contextualization reduces survey response skew."
+        },
+        {
+          id: 5,
+          title: "Toward AI-Supported Decision Making in Innovation: Requirements and design of LLM-based multi-agent systems",
+          venue: "IPDMC 2026",
+          venue_short: "IPDMC",
+          type: "Full Paper",
+          status: "Published",
+          doi: null,
+          contribution: "Requirements engineering for LLM multi-agent decision support systems."
         }
-        const item = document.createElement('div');
-        item.className = 'toc-item';
-        item.dataset.index = i;
-        item.innerHTML = '<span class="toc-num">' + String(i + 1).padStart(2, '0') + '</span><span class="toc-text">' + s.dataset.title + '</span>';
-        item.addEventListener('click', () => { goTo(i); closeTOC(); });
-        tocList.appendChild(item);
+      ],
 
-        // Thumbnail for Grid View Modal
-        const thumb = document.createElement('div');
-        thumb.className = 'thumb-card';
-        thumb.dataset.index = i;
-        thumb.innerHTML = '<div class="thumb-num">Slide ' + String(i + 1).padStart(2, '0') + '</div><div class="thumb-title">' + s.dataset.title + '</div>';
-        thumb.addEventListener('click', () => { goTo(i); closeGridModal(); });
-        thumbGrid.appendChild(thumb);
-      });
-
-      const tocItems = Array.from(document.querySelectorAll('.toc-item'));
-      const thumbItems = Array.from(document.querySelectorAll('.thumb-card'));
-
-      function render() {
-        slides.forEach((s, i) => s.classList.toggle('active', i === current));
-        tocItems.forEach(t => t.classList.toggle('active', Number(t.dataset.index) === current));
-        thumbItems.forEach(t => t.classList.toggle('active', Number(t.dataset.index) === current));
-        folio.textContent = String(current + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
-        progress.style.width = ((current + 1) / total * 100) + '%';
-        prevBtn.disabled = current === 0;
-        nextBtn.disabled = current === total - 1;
-        slides[current].scrollTop = 0;
-
-        if (!chartsDone) { drawCharts(); chartsDone = true; }
-
-        if (current === 4) {
-          initApproachCanvas();
+      rqs: [
+        {
+          id: "RQ 1",
+          colorClass: "rq-c1",
+          question: "What systematic response distortions and biases emerge in LLM persona simulation, and how can they be mitigated?",
+          tasks: [
+            "Quantifying prompt sensitivity, cognitive bias propagation, and hallucination bounds in simulated survey responses",
+            "Formulating technical grounding bounds and memory retrieval mechanisms to maximize response fidelity"
+          ]
+        },
+        {
+          id: "RQ 2",
+          colorClass: "rq-c2",
+          question: "What are enterprise stakeholder requirements, and how does Twinlytics perform compared to traditional panels?",
+          tasks: [
+            "Conducting 15 to 20 semi-structured interviews with enterprise innovation managers and market researchers",
+            "Running a controlled empirical pilot comparing Twinlytics against traditional survey panels"
+          ]
+        },
+        {
+          id: "RQ 3",
+          colorClass: "rq-c3",
+          question: "What new business values, market opportunities, and economic viability models emerge from human-controlled AI twins?",
+          tasks: [
+            "Mapping novel enterprise and consumer use cases for human digital twins",
+            "Assessing value capture architectures, zero-knowledge data sharing, and micro-licensing economic models"
+          ]
         }
-      }
+      ],
 
-      function goTo(i) { current = Math.max(0, Math.min(total - 1, i)); render(); }
-      function next() { if (current < total - 1) { current++; render(); } }
-      function prev() { if (current > 0) { current--; render(); } }
-
-      function openTOC() { toc.classList.add('open'); backdrop.classList.add('open'); }
-      function closeTOC() { toc.classList.remove('open'); backdrop.classList.remove('open'); }
-      function toggleTOC() { toc.classList.contains('open') ? closeTOC() : openTOC(); }
-
-      const gridModal = document.getElementById('gridModal');
-      function openGridModal() { gridModal.classList.add('open'); }
-      function closeGridModal() { gridModal.classList.remove('open'); }
-      function toggleGridModal() { gridModal.classList.contains('open') ? closeGridModal() : openGridModal(); }
-
-      document.getElementById('tocBtn').addEventListener('click', toggleTOC);
-      document.getElementById('tocClose').addEventListener('click', closeTOC);
-      document.getElementById('gridBtn').addEventListener('click', openGridModal);
-      document.getElementById('gridCloseBtn').addEventListener('click', closeGridModal);
-      backdrop.addEventListener('click', closeTOC);
-      prevBtn.addEventListener('click', prev);
-      nextBtn.addEventListener('click', next);
-
-      // Fullscreen Toggle
-      document.getElementById('fsBtn').addEventListener('click', () => {
-        if (!document.fullscreenElement) {
-          document.documentElement.requestFullscreen().catch(err => console.log(err));
-        } else {
-          document.exitFullscreen();
+      papers_planned: [
+        {
+          id: "P1",
+          title: "Technical Distortion Analysis and Mitigation in LLM Persona Simulation",
+          status: "running",
+          venue: "ACM IUI 2027",
+          venue_location: "Helsinki, Feb 2027",
+          deadline_str: "Aug 20, 2026",
+          deadline_date: "2026-08-20",
+          focus: "Categorizing cognitive bias propagation and response skew in LLM-simulated survey panels, and proposing algorithmic mitigation frameworks."
+        },
+        {
+          id: "P2",
+          title: "Requirement Gathering and Twinlytics Platform Evaluation",
+          status: "planned",
+          venue: "ECIS 2027",
+          venue_location: "Luxembourg, May 2027",
+          deadline_str: "Nov 20, 2026",
+          deadline_date: "2026-11-20",
+          focus: "Stakeholder interviews (n = 15 to 20) and a comparative empirical pilot evaluating Twinlytics against traditional panel methods."
+        },
+        {
+          id: "P3",
+          title: "Human Digital Twin Use Cases, Business Value and Twin Economics",
+          status: "planned",
+          venue: "IPDMC 2027",
+          venue_location: "June 2027",
+          deadline_str: "Jan 20, 2027",
+          deadline_date: "2027-01-20",
+          focus: "Formalizing digital twin enterprise and consumer use cases, value creation mechanisms, and economic viability."
         }
-      });
+      ],
 
-      document.addEventListener('keydown', e => {
-        if (e.key === 'ArrowRight' || e.key === 'Space') { e.preventDefault(); next(); }
-        if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
-        if (e.key === 'Escape') { closeTOC(); closeGridModal(); }
-        if (e.key.toLowerCase() === 'c') toggleTOC();
-        if (e.key.toLowerCase() === 'g') toggleGridModal();
-      });
+      phases: [
+        {
+          id: 1,
+          name: "Phase 1",
+          subtitle: "Distortion Study",
+          period: "Q3 2026",
+          status: "running",
+          tasks: [
+            { name: "Dataset analysis for bias and distortion study", status: "running", deadline: null },
+            { name: "Paper 1 manuscript and review preparation", status: "running", deadline: null },
+            { name: "Submit Paper 1 to ACM IUI 2027", status: "planned", deadline: "Aug 20, 2026" }
+          ]
+        },
+        {
+          id: 2,
+          name: "Phase 2",
+          subtitle: "Stakeholder Research",
+          period: "Q3-Q4 2026",
+          status: "planned",
+          tasks: [
+            { name: "Finalize stakeholder interview protocol", status: "planned", deadline: null },
+            { name: "Conduct 15 to 20 stakeholder interviews", status: "planned", deadline: null },
+            { name: "Run Twinlytics versus panel pilot study", status: "planned", deadline: null },
+            { name: "Submit Paper 2 to ECIS 2027", status: "planned", deadline: "Nov 20, 2026" }
+          ]
+        },
+        {
+          id: 3,
+          name: "Phase 3",
+          subtitle: "Twin Economics",
+          period: "Q1-Q2 2027",
+          status: "planned",
+          tasks: [
+            { name: "Formalize digital twin use case taxonomy", status: "planned", deadline: null },
+            { name: "Economic viability model and feasibility analysis", status: "planned", deadline: null },
+            { name: "Submit Paper 3 to IPDMC 2027", status: "planned", deadline: "Jan 20, 2027" }
+          ]
+        },
+        {
+          id: 4,
+          name: "Phase 4",
+          subtitle: "Thesis and Defense",
+          period: "Mid 2027",
+          status: "target",
+          tasks: [
+            { name: "Collate cumulative doctoral thesis document", status: "planned", deadline: null },
+            { name: "Synthesize cross-study insights", status: "planned", deadline: null },
+            { name: "Committee review and revision", status: "planned", deadline: null },
+            { name: "Oral defense", status: "planned", deadline: "Mid 2027" }
+          ]
+        }
+      ],
 
-      // Theme toggle
-      const themeBtn = document.getElementById('themeBtn');
-      themeBtn.addEventListener('click', () => {
-        const root = document.documentElement;
-        const nextTheme = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-        root.setAttribute('data-theme', nextTheme);
-        themeBtn.innerHTML = nextTheme === 'light' ? '&#9789; Light' : '&#9790; Dark';
-        if (chartsDone) { charts.forEach(c => c.destroy()); charts = []; drawCharts(); }
-        if (current === 4) initApproachCanvas();
-      });
+      architecture: [
+        {
+          stage: "01",
+          name: "User Signal Ingestion",
+          desc: "Personal reflective diary entries, survey history, and preference choices are ingested and encrypted client-side."
+        },
+        {
+          stage: "02",
+          name: "Twin Memory Engine",
+          desc: "Vector embeddings and personal state modeling transform static logs into an active, context-aware digital twin memory."
+        },
+        {
+          stage: "03",
+          name: "Simulation Orchestrator",
+          desc: "Multi-agent execution engine that prompts and aggregates synthetic twin cohorts while applying distortion calibration."
+        },
+        {
+          stage: "04",
+          name: "Enterprise Analytics and Payouts",
+          desc: "Enterprise dashboards display statistical distributions and market signals. Revenue micro-payouts of 10 to 20 percent go directly to participating user twins."
+        }
+      ],
 
-      // Roadmap View Switcher Controls
-      const btnPhase = document.getElementById('btnPhaseView');
-      const btnMatrix = document.getElementById('btnMatrixView');
-      const phaseView = document.getElementById('roadmapPhaseView');
-      const matrixView = document.getElementById('roadmapMatrixView');
+      next_steps: [
+        "Finalize dataset analysis and complete Paper 1 draft for ACM IUI 2027. Submission deadline: August 20, 2026.",
+        "Finalize semi-structured interview protocol for stakeholder needs evaluation (n = 15 to 20 participants).",
+        "Configure Twinlytics platform parameters for the comparative pilot evaluation against traditional survey panels."
+      ],
 
-      if (btnPhase && btnMatrix) {
-        btnPhase.addEventListener('click', () => {
-          btnPhase.classList.add('active');
-          btnMatrix.classList.remove('active');
-          phaseView.style.display = 'block';
-          matrixView.style.display = 'none';
-        });
-        btnMatrix.addEventListener('click', () => {
-          btnMatrix.classList.add('active');
-          btnPhase.classList.remove('active');
-          matrixView.style.display = 'block';
-          phaseView.style.display = 'none';
-        });
-      }
+      committee_topics: [
+        "Refinement of the stakeholder interview guide protocol.",
+        "Strategic selection of secondary target tracks: ACM CHI 2027 vs. ACM UMAP 2027 vs. ECIS 2027.",
+        "Finalizing data sharing and differential privacy governance assumptions for Paper 3."
+      ]
+    };
 
-      // Track Node Clicks in Phase View
-      const trackNodes = document.querySelectorAll('.track-node');
-      const phaseCards = document.querySelectorAll('.phase-card');
+    /* ============================================================
+       NAVIGATION CONFIG
+    ============================================================ */
+    const NAV = [
+      { id: "sec-dashboard",    label: "Dashboard",         icon: `<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>` },
+      { id: "sec-publications", label: "Publications",      icon: `<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>` },
+      { id: "sec-rqs",          label: "Research Questions",icon: `<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>` },
+      { id: "sec-papers",       label: "Papers In Progress",icon: `<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>` },
+      { id: "sec-kanban",       label: "Phase Board",       icon: `<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="5" height="18" rx="1"/><rect x="9.5" y="3" width="5" height="13" rx="1"/><rect x="16" y="3" width="5" height="9" rx="1"/></svg>` },
+      { id: "sec-roadmap",      label: "Roadmap",           icon: `<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>` },
+      { id: "sec-architecture", label: "System",            icon: `<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>` },
+      { id: "sec-committee",    label: "Committee",         icon: `<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>` }
+    ];
 
-      trackNodes.forEach(tn => {
-        tn.addEventListener('click', () => {
-          const idx = tn.dataset.phase;
-          trackNodes.forEach(n => n.classList.remove('active'));
-          phaseCards.forEach(c => c.classList.remove('active-phase'));
-          tn.classList.add('active');
-          const targetCard = document.getElementById('pc' + idx);
-          if (targetCard) targetCard.classList.add('active-phase');
-        });
-      });
+    /* ============================================================
+       RENDER FUNCTIONS
+    ============================================================ */
 
-      // TWINLYTICS PIPELINE CANVAS ANIMATION
-      let currentStage = 0;
-      const stageDescriptions = [
-        "<strong>Stage 1: User Signal Ingestion:</strong> Individuals contribute reflective notes, survey responses, and behavioral choices. Data is encrypted client-side and owned exclusively by the user.",
-        "<strong>Stage 2: Twin Memory Engine:</strong> Machine learning pipelines synthesize personal data into a contextual AI digital twin protected by differential privacy and contextual memory bounds.",
-        "<strong>Stage 3: Simulation Orchestrator:</strong> Enterprise market researchers submit research queries or concept tests. Twins generate rapid, accurate population responses with explicit consent.",
-        "<strong>Stage 4: Analytics & Revenue Payouts:</strong> Multi-agent analytics synthesize market insights while automated contracts distribute micro-payouts directly to contributing users."
+    function renderNav() {
+      document.getElementById('sb-nav').innerHTML = NAV.map(n =>
+        `<a href="#${n.id}" class="nav-item" data-sec="${n.id}" onclick="jumpTo(event,'${n.id}')">${n.icon}<span>${n.label}</span></a>`
+      ).join('');
+    }
+
+    function renderKPIs() {
+      document.getElementById('updated-badge').textContent = 'Updated: ' + DATA.meta.updated;
+      document.getElementById('dash-lead').textContent =
+        'I am ' + DATA.meta.candidate + ', a doctoral candidate at ' + DATA.meta.institution + '. '
+        + 'My thesis investigates ' + DATA.meta.title.toLowerCase() + '. '
+        + 'This page is my personal record of the research as it progresses toward a '
+        + DATA.meta.completion + ' defense.';
+
+      const today = new Date();
+      const p1dl = new Date(DATA.papers_planned[0].deadline_date);
+      const days = Math.ceil((p1dl - today) / 86400000);
+      const dLabel = days > 0 ? days + 'd left' : days === 0 ? 'Today' : 'Passed';
+      const urgent = days >= 0 && days <= 60;
+      const curPhase = DATA.phases.find(p => p.id === DATA.meta.current_phase_id);
+
+      const kpis = [
+        { label: 'Published Papers',    val: DATA.publications.length,       sub: 'ACM CHI, UMAP, Springer, IPDMC', cls: 'accent-top' },
+        { label: 'Papers Planned',      val: DATA.papers_planned.length,     sub: 'To complete the thesis requirements', cls: 'accent-top' },
+        { label: 'Target Defense',      val: DATA.meta.completion,           sub: 'Cumulative thesis format', cls: 'accent-top' },
+        { label: 'Primary Supervisors', val: DATA.supervision.primary.length, sub: DATA.supervision.primary.map(s => s.name.split(' ').slice(-2).join(' ')).join(', '), cls: 'accent-top' },
+        { label: 'Active Phase',        val: 'Phase ' + DATA.meta.current_phase_id, sub: curPhase ? curPhase.subtitle : '', cls: 'running-top' },
+        { label: 'P1 Deadline',         val: dLabel, sub: DATA.papers_planned[0].deadline_str + ' \u00b7 ' + DATA.papers_planned[0].venue, cls: urgent ? 'warn-top' : 'accent-top' }
       ];
 
-      const stageBtns = document.querySelectorAll('.stage-btn');
-      const detailBox = document.getElementById('approachDetail');
+      document.getElementById('kpi-grid').innerHTML = kpis.map(k =>
+        '<div class="kpi-card ' + k.cls + '">'
+        + '<div class="kpi-label">' + k.label + '</div>'
+        + '<div class="kpi-value">' + k.val + '</div>'
+        + '<div class="kpi-sub">' + k.sub + '</div>'
+        + '</div>'
+      ).join('');
+    }
 
-      stageBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-          stageBtns.forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          currentStage = parseInt(btn.dataset.stage);
-          if (detailBox) detailBox.innerHTML = stageDescriptions[currentStage];
-        });
+    function renderPhaseProgress() {
+      const pct = DATA.meta.progress_pct;
+      document.getElementById('prog-pct').textContent = pct + '%';
+      document.getElementById('phase-bars').innerHTML = DATA.phases.map(p =>
+        '<div class="ph-bar ' + p.status + '" title="' + p.name + ': ' + p.subtitle + '"></div>'
+      ).join('');
+      document.getElementById('phase-bar-labels').innerHTML = DATA.phases.map(p =>
+        '<div class="ph-bar-label">' + p.name + '</div>'
+      ).join('');
+    }
+
+    function renderCharts() {
+      const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+      const tc   = dark ? '#484f58' : '#8a8a9a';
+      const gc   = dark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)';
+      const pal  = dark
+        ? ['#3fb950', '#79c0ff', '#d29922', '#a78bfa', '#f78166']
+        : ['#1a6b3c', '#1d4ed8', '#b45309', '#6d28d9', '#dc2626'];
+      const bg   = dark ? '#21262d' : '#ffffff';
+
+      if (window._c1) { try { window._c1.destroy(); } catch(e){} }
+      if (window._c2) { try { window._c2.destroy(); } catch(e){} }
+
+      const typeCount = {};
+      DATA.publications.forEach(p => { typeCount[p.type] = (typeCount[p.type] || 0) + 1; });
+
+      window._c1 = new Chart(document.getElementById('chart-types'), {
+        type: 'doughnut',
+        data: {
+          labels: Object.keys(typeCount),
+          datasets: [{
+            data: Object.values(typeCount),
+            backgroundColor: pal.slice(0, Object.keys(typeCount).length),
+            borderColor: bg,
+            borderWidth: 3
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'right',
+              labels: { color: tc, font: { family: 'Inter', size: 11 }, padding: 10, boxWidth: 10, boxHeight: 10 }
+            }
+          }
+        }
       });
 
-      let animId = null;
+      const venueCount = {};
+      DATA.publications.forEach(p => { venueCount[p.venue_short] = (venueCount[p.venue_short] || 0) + 1; });
 
-      function initApproachCanvas() {
-        const canvas = document.getElementById('approachCanvas');
-        if (!canvas) return;
-        const ctx = canvas.getContext('2d');
-
-        const rect = canvas.parentElement.getBoundingClientRect();
-        canvas.width = rect.width * window.devicePixelRatio;
-        canvas.height = rect.height * window.devicePixelRatio;
-        ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
-
-        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-        const accentColor = isDark ? '#58a6ff' : '#0f5132';
-        const goodColor = isDark ? '#3fb950' : '#146c43';
-        const textColor = isDark ? '#c9d1d9' : '#1a1a1a';
-        const subColor = isDark ? '#8b949e' : '#737373';
-        const cardBg = isDark ? '#21262d' : '#ffffff';
-
-        const width = rect.width;
-        const height = rect.height;
-
-        const nodes = [
-          { x: width * 0.15, y: height * 0.5, label: "User Ingestion", step: "01" },
-          { x: width * 0.38, y: height * 0.5, label: "Twin Memory Engine", step: "02" },
-          { x: width * 0.62, y: height * 0.5, label: "Simulation Engine", step: "03" },
-          { x: width * 0.85, y: height * 0.5, label: "Enterprise Analytics", step: "04" }
-        ];
-
-        let particles = [];
-        for (let i = 0; i < 18; i++) {
-          particles.push({
-            progress: Math.random(),
-            speed: 0.003 + Math.random() * 0.004,
-            stage: Math.floor(Math.random() * 3)
-          });
-        }
-
-        if (animId) cancelAnimationFrame(animId);
-
-        function draw() {
-          ctx.clearRect(0, 0, width, height);
-
-          // Connection Lines
-          ctx.lineWidth = 3;
-          for (let i = 0; i < nodes.length - 1; i++) {
-            ctx.strokeStyle = (i === currentStage) ? accentColor : (isDark ? '#374151' : '#e2e8f0');
-            ctx.beginPath();
-            ctx.moveTo(nodes[i].x, nodes[i].y);
-            ctx.lineTo(nodes[i + 1].x, nodes[i + 1].y);
-            ctx.stroke();
-          }
-
-          // Bottom Revenue Payout Arc
-          ctx.strokeStyle = (currentStage === 3) ? goodColor : (isDark ? '#374151' : '#e2e8f0');
-          ctx.setLineDash([6, 6]);
-          ctx.beginPath();
-          ctx.moveTo(nodes[3].x, nodes[3].y + 20);
-          ctx.bezierCurveTo(nodes[3].x, height * 0.88, nodes[0].x, height * 0.88, nodes[0].x, nodes[0].y + 20);
-          ctx.stroke();
-          ctx.setLineDash([]);
-
-          ctx.fillStyle = (currentStage === 3) ? goodColor : subColor;
-          ctx.font = "600 12px 'JetBrains Mono', monospace";
-          ctx.textAlign = "center";
-          ctx.fillText("Direct Revenue Payout to Users", width * 0.5, height * 0.88 + 14);
-
-          // Particles
-          particles.forEach(p => {
-            p.progress += p.speed;
-            if (p.progress > 1) p.progress = 0;
-
-            let startNode = nodes[p.stage];
-            let endNode = nodes[p.stage + 1];
-
-            if (startNode && endNode) {
-              let px = startNode.x + (endNode.x - startNode.x) * p.progress;
-              let py = startNode.y + (endNode.y - startNode.y) * p.progress;
-
-              ctx.fillStyle = (p.stage === currentStage) ? accentColor : goodColor;
-              ctx.beginPath();
-              ctx.arc(px, py, (p.stage === currentStage) ? 6 : 4, 0, Math.PI * 2);
-              ctx.fill();
-            }
-          });
-
-          // Draw Nodes
-          nodes.forEach((n, idx) => {
-            const isHighlight = (idx === currentStage || (idx === currentStage + 1));
-
-            ctx.fillStyle = isHighlight ? (isDark ? 'rgba(56,189,248,0.2)' : 'rgba(2,132,199,0.12)') : 'transparent';
-            ctx.beginPath();
-            ctx.arc(n.x, n.y, 34, 0, Math.PI * 2);
-            ctx.fill();
-
-            ctx.fillStyle = cardBg;
-            ctx.strokeStyle = isHighlight ? accentColor : (isDark ? '#4b5563' : '#cbd5e1');
-            ctx.lineWidth = isHighlight ? 3 : 1.5;
-            ctx.beginPath();
-            ctx.arc(n.x, n.y, 24, 0, Math.PI * 2);
-            ctx.fill();
-            ctx.stroke();
-
-            ctx.fillStyle = isHighlight ? accentColor : subColor;
-            ctx.font = "600 13px 'JetBrains Mono', monospace";
-            ctx.textAlign = "center";
-            ctx.textBaseline = "middle";
-            ctx.fillText(n.step, n.x, n.y);
-
-            ctx.fillStyle = isHighlight ? textColor : subColor;
-            ctx.font = isHighlight ? "600 13px 'Inter', sans-serif" : "500 12px 'Inter', sans-serif";
-            ctx.fillText(n.label, n.x, n.y - 36);
-          });
-
-          animId = requestAnimationFrame(draw);
-        }
-
-        draw();
-      }
-
-      // CHARTS IMPLEMENTATION
-      function palette() {
-        const dark = document.documentElement.getAttribute('data-theme') === 'dark';
-        return {
-          grid: dark ? 'rgba(255,255,255,.08)' : 'rgba(15,23,42,.08)',
-          text: dark ? '#c9d1d9' : '#4a4a4a',
-          a: dark ? '#58a6ff' : '#0f5132',
-          aSoft: dark ? 'rgba(88,166,255,.25)' : 'rgba(15,81,50,.15)',
-          g: dark ? '#3fb950' : '#146c43',
-          gSoft: dark ? 'rgba(63,185,80,.25)' : 'rgba(20,108,67,.15)',
-          w: dark ? '#d29922' : '#664d03'
-        };
-      }
-
-      function drawCharts() {
-        const p = palette();
-        const base = {
-          responsive: true, maintainAspectRatio: false,
-          plugins: { legend: { labels: { color: p.text, font: { family: 'Inter', size: 11, weight: 500 } } } },
+      window._c2 = new Chart(document.getElementById('chart-venues'), {
+        type: 'bar',
+        data: {
+          labels: Object.keys(venueCount),
+          datasets: [{
+            label: 'Papers',
+            data: Object.values(venueCount),
+            backgroundColor: dark ? 'rgba(121,192,255,0.55)' : 'rgba(30,58,95,0.55)',
+            borderColor:     dark ? '#79c0ff' : '#1e3a5f',
+            borderWidth: 1,
+            borderRadius: 4,
+            borderSkipped: false
+          }]
+        },
+        options: {
+          indexAxis: 'y',
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
           scales: {
-            x: { grid: { color: p.grid }, ticks: { color: p.text, font: { family: 'Inter', size: 10 } } },
-            y: { grid: { color: p.grid }, ticks: { color: p.text, font: { family: 'Inter', size: 10 } } }
+            x: { min: 0, ticks: { color: tc, font: { size: 10 }, stepSize: 1 }, grid: { color: gc } },
+            y: { ticks: { color: tc, font: { size: 11 } }, grid: { display: false } }
           }
-        };
+        }
+      });
+    }
 
-        // Chart 1: Efficiency & Cost Comparison (Bar Chart)
-        const e1 = document.getElementById('c1');
-        if (e1) charts.push(new Chart(e1, {
-          type: 'bar',
-          data: {
-            labels: ['Time-to-Insight (Days)', 'Cost per 100 Responses ($K)', 'Cohort Availability (%)'],
-            datasets: [
-              {
-                label: 'Traditional Panel Surveys',
-                data: [14, 8.5, 45],
-                backgroundColor: p.w
-              },
-              {
-                label: 'Twinlytics Twin Platform',
-                data: [0.1, 1.2, 92],
-                backgroundColor: p.a
-              }
-            ]
-          },
-          options: {
-            ...base,
-            plugins: {
-              legend: { position: 'top', labels: { color: p.text, font: { family: 'Inter', size: 11 } } },
-              title: { display: true, text: 'Operational Comparison: Traditional Panels vs Twinlytics', color: p.text, font: { family: 'Inter', size: 12, weight: '600' } }
-            }
+    function renderPublications() {
+      const typeBadge = { 'Full Paper': 'badge-pub', 'Book Chapter': 'badge-chapter', 'Extended Abstract': 'badge-ea' };
+      document.getElementById('pub-tbody').innerHTML = DATA.publications.map(p =>
+        '<tr>'
+        + '<td><span class="pub-num">' + p.id + '</span></td>'
+        + '<td class="pub-title-cell">'
+        +   '<div class="pub-title">' + p.title + '</div>'
+        +   '<div class="pub-contrib">' + p.contribution + '</div>'
+        + '</td>'
+        + '<td><span class="pub-venue">' + p.venue + '</span></td>'
+        + '<td><span class="badge ' + (typeBadge[p.type] || 'badge-ea') + '">' + p.type + '</span></td>'
+        + '<td><span class="badge badge-pub"><span class="badge-dot"></span>' + p.status + '</span></td>'
+        + '<td>'
+        + (p.doi
+            ? '<a href="https://doi.org/' + p.doi + '" target="_blank" rel="noopener" class="doi-link">'
+              + '<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>'
+              + 'DOI</a>'
+            : '<span style="font-size:0.7rem;color:var(--text-3)">In press</span>')
+        + '</td>'
+        + '</tr>'
+      ).join('');
+    }
+
+    function renderRQs() {
+      document.getElementById('rq-grid').innerHTML = DATA.rqs.map(rq =>
+        '<div class="rq-card ' + rq.colorClass + '">'
+        + '<div class="rq-id">' + rq.id + '</div>'
+        + '<div class="rq-q">\u201c' + rq.question + '\u201d</div>'
+        + '<ul class="rq-tasks">' + rq.tasks.map(t => '<li>' + t + '</li>').join('') + '</ul>'
+        + '</div>'
+      ).join('');
+    }
+
+    function renderPapers() {
+      const today = new Date();
+      document.getElementById('papers-grid').innerHTML = DATA.papers_planned.map(p => {
+        const dl    = new Date(p.deadline_date);
+        const days  = Math.ceil((dl - today) / 86400000);
+        const urgent = days >= 0 && days <= 60;
+        return '<div class="paper-card">'
+          + '<div class="paper-card-head">'
+          +   '<span class="paper-id">' + p.id + '</span>'
+          +   '<span class="badge badge-' + p.status + '">' + p.status.charAt(0).toUpperCase() + p.status.slice(1) + '</span>'
+          + '</div>'
+          + '<div class="paper-title">' + p.title + '</div>'
+          + '<div class="paper-venue-row">'
+          +   '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>'
+          +   p.venue + ' &middot; ' + p.venue_location
+          + '</div>'
+          + '<div class="paper-focus">' + p.focus + '</div>'
+          + '<div class="deadline-chip ' + (urgent ? 'dl-urgent' : 'dl-normal') + '">'
+          +   '<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>'
+          +   p.deadline_str + (urgent && days > 0 ? ' &mdash; ' + days + 'd left' : '')
+          + '</div>'
+          + '</div>';
+      }).join('');
+    }
+
+    function renderKanban() {
+      document.getElementById('kanban-board').innerHTML = DATA.phases.map(ph =>
+        '<div class="kanban-col ' + ph.status + '" id="kcol-' + ph.id + '">'
+        + '<div class="kanban-col-head">'
+        +   '<div class="k-phase-label">' + ph.name + '</div>'
+        +   '<div class="k-phase-name">' + ph.subtitle + '</div>'
+        +   '<div class="k-phase-meta">'
+        +     '<span class="k-period">' + ph.period + '</span>'
+        +     '<span class="badge badge-' + ph.status + '">' + ph.status.charAt(0).toUpperCase() + ph.status.slice(1) + '</span>'
+        +   '</div>'
+        + '</div>'
+        + '<div class="kanban-tasks">'
+        + ph.tasks.map(t =>
+            '<div class="k-task">'
+            + '<div class="k-task-name">' + t.name + '</div>'
+            + '<div class="k-task-footer">'
+            +   '<span class="badge badge-' + t.status + '" style="font-size:0.57rem;"><span class="badge-dot"></span>' + t.status + '</span>'
+            + (t.deadline ? '<span class="badge badge-deadline" style="font-size:0.57rem;">' + t.deadline + '</span>' : '')
+            + '</div>'
+            + '</div>'
+          ).join('')
+        + '</div>'
+        + '</div>'
+      ).join('');
+    }
+
+    function renderRoadmap() {
+      document.getElementById('roadmap-rail').innerHTML = DATA.phases.map(ph =>
+        '<div class="rm-node-wrap" onclick="highlightKanbanCol(' + ph.id + ')" title="Jump to ' + ph.name + '">'
+        + '<div class="rm-node ' + ph.status + '">P' + ph.id + '</div>'
+        + '<div class="rm-label">'
+        +   '<div class="rm-phase">' + ph.name + '</div>'
+        +   '<div class="rm-name">' + ph.subtitle + '</div>'
+        +   '<div class="rm-period">' + ph.period + '</div>'
+        + '</div>'
+        + '</div>'
+      ).join('');
+      const pct = DATA.meta.progress_pct;
+      document.getElementById('rm-pct').textContent = pct + '%';
+      document.getElementById('rm-fill').style.width = pct + '%';
+    }
+
+    function renderArchitecture() {
+      let html = '';
+      DATA.architecture.forEach((s, i) => {
+        html += '<div class="arch-stage">'
+          + '<div class="arch-num">Stage ' + s.stage + '</div>'
+          + '<div class="arch-name">' + s.name + '</div>'
+          + '<div class="arch-desc">' + s.desc + '</div>'
+          + '</div>';
+        if (i < DATA.architecture.length - 1) {
+          html += '<div class="arch-connector">&#8594;</div>';
+        }
+      });
+      document.getElementById('arch-flex').innerHTML = html;
+    }
+
+    function renderCommittee() {
+      document.getElementById('sup-grid').innerHTML = DATA.supervision.primary.map(s =>
+        '<div class="sup-card">'
+        + '<div class="sup-role">' + s.role + '</div>'
+        + '<div class="sup-name">' + s.name + '</div>'
+        + '<div class="sup-inst">' + s.institution + '</div>'
+        + '</div>'
+      ).join('');
+
+      document.getElementById('collab-chips').innerHTML = DATA.supervision.secondary.map(s =>
+        '<span class="collab-chip">' + s.name + '</span>'
+      ).join('');
+
+      document.getElementById('next-steps-list').innerHTML = DATA.next_steps.map((t, i) =>
+        '<li class="step-item">'
+        + '<span class="step-num">' + (i + 1) + '</span>'
+        + '<span class="step-text">' + t + '</span>'
+        + '</li>'
+      ).join('');
+
+      document.getElementById('committee-list').innerHTML = DATA.committee_topics.map(t =>
+        '<li class="bullet-item">' + t + '</li>'
+      ).join('');
+    }
+
+    /* ============================================================
+       NAVIGATION
+    ============================================================ */
+    function jumpTo(e, id) {
+      e.preventDefault();
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function highlightKanbanCol(phaseId) {
+      document.getElementById('sec-kanban').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setTimeout(function() {
+        var el = document.getElementById('kcol-' + phaseId);
+        if (!el) return;
+        el.style.boxShadow = '0 0 0 2px var(--accent), var(--shadow-md)';
+        setTimeout(function() { el.style.boxShadow = ''; }, 2400);
+      }, 650);
+    }
+
+    function initScrollspy() {
+      var sections = NAV.map(function(n) { return document.getElementById(n.id); }).filter(Boolean);
+      var links    = document.querySelectorAll('.nav-item');
+      var io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(en) {
+          if (en.isIntersecting) {
+            links.forEach(function(l) { l.classList.remove('active'); });
+            var a = document.querySelector('.nav-item[data-sec="' + en.target.id + '"]');
+            if (a) a.classList.add('active');
           }
-        }));
+        });
+      }, { rootMargin: '-12% 0px -80% 0px', threshold: 0 });
+      sections.forEach(function(s) { io.observe(s); });
+    }
 
-      }
+    /* ============================================================
+       THEME
+    ============================================================ */
+    function applyTheme(t) {
+      document.documentElement.setAttribute('data-theme', t);
+      document.getElementById('theme-icon').textContent = t === 'dark' ? '\u2600' : '\u263D';
+      try { localStorage.setItem('phd-theme', t); } catch(e) {}
+    }
 
-      render();
-    })();
+    document.getElementById('theme-btn').addEventListener('click', function() {
+      var cur = document.documentElement.getAttribute('data-theme');
+      applyTheme(cur === 'dark' ? 'light' : 'dark');
+      setTimeout(renderCharts, 50);
+    });
+
+    /* ============================================================
+       INIT
+    ============================================================ */
+    function init() {
+      var saved = 'light';
+      try { saved = localStorage.getItem('phd-theme') || 'light'; } catch(e) {}
+      applyTheme(saved);
+      renderNav();
+      renderKPIs();
+      renderPhaseProgress();
+      renderPublications();
+      renderRQs();
+      renderPapers();
+      renderKanban();
+      renderRoadmap();
+      renderArchitecture();
+      renderCommittee();
+      requestAnimationFrame(renderCharts);
+      initScrollspy();
+    }
+
+    document.addEventListener('DOMContentLoaded', init);
   </script>
 </body>
-
 </html>
