@@ -109,7 +109,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 24px 0 calc(var(--sidebar-w) + 20px);
+      padding: 0 24px;
       background: var(--panel);
       border-bottom: 1px solid var(--border);
       box-shadow: var(--shadow);
@@ -161,15 +161,16 @@
     ============================================================ */
     .sidebar {
       position: fixed;
-      top: 0; left: 0;
+      top: var(--topbar-h); left: 0;
       width: var(--sidebar-w);
-      height: 100vh;
+      height: calc(100vh - var(--topbar-h));
       background: var(--panel);
       border-right: 1px solid var(--border);
       display: flex;
       flex-direction: column;
       z-index: 90;
       overflow-y: auto;
+      transition: transform 0.3s ease;
     }
     .sb-brand {
       padding: 14px 16px 12px;
@@ -245,6 +246,7 @@
       scroll-snap-type: x mandatory;
       scroll-behavior: smooth;
       box-sizing: border-box;
+      transition: margin-left 0.3s ease, width 0.3s ease;
     }
     .section { 
       min-width: calc(100vw - var(--sidebar-w)); 
@@ -255,6 +257,7 @@
       scroll-snap-align: start;
       overflow-y: auto;
       box-sizing: border-box;
+      transition: min-width 0.3s ease;
     }
     .section:last-child { border-right: none; }
     .section-inner { max-width: 1040px; }
@@ -743,9 +746,14 @@
        TOPBAR
   ==================================================== -->
   <header class="topbar">
-    <div class="topbar-left">
-      <div class="topbar-title">PhD Research Dashboard</div>
-      <div class="topbar-sub">Bhupender Kumar Saini &middot; Fraunhofer IAO &middot; Stuttgart</div>
+    <div class="topbar-left" style="display: flex; align-items: center; gap: 14px;">
+      <button class="icon-btn" id="sidebar-toggle-btn" onclick="toggleSidebar()" title="Toggle navigation sidebar" aria-label="Toggle sidebar">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <div>
+        <div class="topbar-title">PhD Research Dashboard</div>
+        <div class="topbar-sub">Bhupender Kumar Saini &middot; Fraunhofer IAO &middot; Stuttgart</div>
+      </div>
     </div>
     <div class="topbar-actions">
       <span class="updated-badge" id="updated-badge">Updated: —</span>
