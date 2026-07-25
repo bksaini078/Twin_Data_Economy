@@ -954,47 +954,35 @@
       </div>
     </section>
 
-    <!-- 08 Phase Board -->
-    <section class="section" id="sec-kanban">
+    <!-- 08 Phase Board & Roadmap -->
+    <section class="section" id="sec-roadmap">
       <div class="section-inner">
-        <div class="section-eyebrow">08 &middot; Phase Board</div>
-        <h2 class="section-title">PhD Phase Board</h2>
+        <div class="section-eyebrow">08 &middot; Roadmap &amp; Phases</div>
+        <h2 class="section-title">Research Roadmap</h2>
         <p class="section-lead">
-          Each column represents one thesis phase.
-          Phase 1 is currently active.
-          All other phases are planned.
-          Clicking a node on the Roadmap scrolls here and highlights the corresponding column.
+          The phases of the doctoral program from 2024 to mid 2027.
+          The active phase has a green node with a pulse animation.
+          Click any node to highlight the corresponding phase board column below.
         </p>
+
+        <div class="roadmap-rail" id="roadmap-rail"></div>
+        <div class="progress-block-head" style="margin-top: 16px;">
+          <span class="progress-block-label">Overall Progress</span>
+          <span class="progress-block-val" id="rm-pct">—</span>
+        </div>
+        <div class="prog-track" style="margin-bottom: 40px;">
+          <div class="prog-fill" id="rm-fill" style="width:0%"></div>
+        </div>
+        
+        <h3 class="section-title" style="margin-top: 40px; font-size: 1.5rem; margin-bottom: 24px;">Phase Details</h3>
         <div class="kanban-board" id="kanban-board"></div>
       </div>
     </section>
 
-    <!-- 09 Roadmap -->
-    <section class="section" id="sec-roadmap">
-      <div class="section-inner">
-        <div class="section-eyebrow">09 &middot; Roadmap</div>
-        <h2 class="section-title">Research Roadmap</h2>
-        <p class="section-lead">
-          The four phases of the doctoral program from Q3 2026 to mid 2027.
-          The active phase has a green node with a pulse animation.
-          Click any node to jump to the Phase Board.
-        </p>
-        <div class="roadmap-rail" id="roadmap-rail"></div>
-        <p class="roadmap-hint">Click a phase node to jump to the Phase Board and highlight that column.</p>
-        <div class="progress-block-head">
-          <span class="progress-block-label">Overall Progress</span>
-          <span class="progress-block-val" id="rm-pct">—</span>
-        </div>
-        <div class="prog-track">
-          <div class="prog-fill" id="rm-fill" style="width:0%"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 10 System Architecture -->
+    <!-- 09 System Architecture -->
     <section class="section" id="sec-architecture">
       <div class="section-inner">
-        <div class="section-eyebrow">10 &middot; System Architecture</div>
+        <div class="section-eyebrow">09 &middot; System Architecture</div>
         <h2 class="section-title">Twinlytics Platform</h2>
         <p class="section-lead">
           Twinlytics is the software artifact developed as part of this research.
@@ -1005,10 +993,10 @@
       </div>
     </section>
 
-    <!-- 11 Committee -->
+    <!-- 10 Committee -->
     <section class="section" id="sec-committee">
       <div class="section-inner">
-        <div class="section-eyebrow">11 &middot; Committee</div>
+        <div class="section-eyebrow">10 &middot; Committee</div>
         <h2 class="section-title">Supervision and Next Steps</h2>
         <p class="section-lead">
           This section records the supervisory committee, the immediate action items for the next three months,
@@ -1328,8 +1316,7 @@
       { id: "sec-publications", label: "Publications",      icon: `<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>` },
       { id: "sec-rqs",          label: "Research Questions",icon: `<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>` },
       { id: "sec-papers",       label: "Papers In Progress",icon: `<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>` },
-      { id: "sec-kanban",       label: "Phase Board",       icon: `<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="5" height="18" rx="1"/><rect x="9.5" y="3" width="5" height="13" rx="1"/><rect x="16" y="3" width="5" height="9" rx="1"/></svg>` },
-      { id: "sec-roadmap",      label: "Roadmap",           icon: `<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>` },
+      { id: "sec-roadmap",      label: "Roadmap & Phases",  icon: `<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>` },
       { id: "sec-architecture", label: "System",            icon: `<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>` },
       { id: "sec-committee",    label: "Committee",         icon: `<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>` }
     ];
@@ -1613,13 +1600,11 @@
     }
 
     function highlightKanbanCol(phaseId) {
-      document.getElementById('sec-kanban').scrollIntoView({ behavior: 'smooth', block: 'start' });
-      setTimeout(function() {
-        var el = document.getElementById('kcol-' + phaseId);
-        if (!el) return;
-        el.style.boxShadow = '0 0 0 2px var(--accent), var(--shadow-md)';
-        setTimeout(function() { el.style.boxShadow = ''; }, 2400);
-      }, 650);
+      var el = document.getElementById('kcol-' + phaseId);
+      if (!el) return;
+      el.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+      el.style.boxShadow = '0 0 0 2px var(--accent), var(--shadow-md)';
+      setTimeout(function() { el.style.boxShadow = ''; }, 2400);
     }
 
     function initScrollspy() {
