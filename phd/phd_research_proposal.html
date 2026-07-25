@@ -792,10 +792,110 @@
       </div>
     </section>
 
-    <!-- 01 Publications -->
+    <!-- 01 Introduction -->
+    <section class="section" id="sec-intro">
+      <div class="section-inner">
+        <div class="section-eyebrow">01 &middot; Introduction</div>
+        <h2 class="section-title">The Data Exhaustion Crisis and Synthetic Methodologies</h2>
+        <p class="section-lead">
+          The proliferation of Large Language Models (LLMs) has precipitated a structural shift in how behavioral data is generated and consumed. As AI-generated material increasingly saturates the active web corpus (estimated at 30-40%), the risk of a "model collapse" loop—where models train on synthetic artifacts rather than ground-truth human behavior—has become acute. Concurrently, behavioral research faces a fidelity crisis, as traditional methods struggle to capture the nuance of diverse human populations at scale. This research addresses the critical need for scientifically grounded, high-fidelity human data pipelines in the age of generative AI.
+        </p>
+      </div>
+    </section>
+
+    <!-- 02 Motivation -->
+    <section class="section" id="sec-motivation">
+      <div class="section-inner">
+        <div class="section-eyebrow">02 &middot; Motivation</div>
+        <h2 class="section-title">Methodological Flaws in Current Behavioral Data Paradigms</h2>
+        <p class="section-lead">
+          Current paradigms for behavioral modeling and market simulation exhibit significant methodological and ethical vulnerabilities.
+        </p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; margin-top: 32px;">
+          <div class="rq-card" style="background: var(--panel);">
+            <h4 style="color: var(--accent); margin-bottom: 12px; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;">1. Non-Consensual Extraction</h4>
+            <p style="font-size: 0.95rem; color: var(--text-2);">Platforms harvest behavioral signals (clicks, sentiment, purchases) without explicit user consent or compensation. This paradigm is increasingly untenable under tightening global regulatory frameworks (e.g., GDPR) and eroding public trust.</p>
+          </div>
+          <div class="rq-card" style="background: var(--panel);">
+            <h4 style="color: var(--accent); margin-bottom: 12px; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;">2. Shallow Market Research</h4>
+            <p style="font-size: 0.95rem; color: var(--text-2);">Traditional survey methodologies rely on generic, static personas and inherently small sample sizes (N=10–50), systematically failing to capture the longitudinal dynamics and nuanced variance of real human behavior.</p>
+          </div>
+          <div class="rq-card" style="background: var(--panel);">
+            <h4 style="color: var(--accent); margin-bottom: 12px; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;">3. The Fidelity Gap</h4>
+            <p style="font-size: 0.95rem; color: var(--text-2);">While synthetic data generation using LLMs is accelerating, empirical evidence indicates that without rich, longitudinal psychological grounding, synthetic participants exhibit substantial alignment gaps and heuristic biases compared to their human counterparts.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 Vision -->
+    <section class="section" id="sec-vision">
+      <div class="section-inner">
+        <div class="section-eyebrow">03 &middot; Vision</div>
+        <h2 class="section-title">A Consensual, Participatory Data Architecture</h2>
+        <p class="section-lead">
+          This research proposes a paradigm shift toward a participatory behavioral data architecture. Instead of covert extraction, the model relies on explicit consent and meritocratic compensation.
+        </p>
+        <p style="font-size: 1.05rem; color: var(--text); margin-top: 20px; line-height: 1.7;">
+          By empowering individuals to own and selectively provision access to their digital twins—constructed via privacy-preserving, longitudinal embeddings of their authentic micro-behaviors (preferences, moods, choices)—we can generate high-fidelity, auditable synthetic panels. This approach theoretically aligns methodological rigor with ethical data sovereignty, allowing researchers to query behavioral models at scale (N=10,000+) while ensuring that the humans who supply the foundational ground-truth data participate directly in its value generation.
+        </p>
+      </div>
+    </section>
+
+    <!-- 04 Related Work -->
+    <section class="section" id="sec-related">
+      <div class="section-inner">
+        <div class="section-eyebrow">04 &middot; Related Work</div>
+        <h2 class="section-title">Synthetic Data and Agentic Simulation Landscape</h2>
+        <p class="section-lead">
+          The rapidly evolving landscape of synthetic respondents is characterized by varying methodological approaches and degrees of human grounding.
+        </p>
+        
+        <div class="pub-table-wrap" style="margin-top: 32px;">
+          <table class="pub-table">
+            <thead>
+              <tr>
+                <th>Approach / Typology</th>
+                <th>Notable Platforms &amp; Research</th>
+                <th>Methodological Limitations &amp; Findings</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Systematic Critiques of Synthetic Data</strong></td>
+                <td>Bisbee et al. (2024); Kuric et al. (2026)</td>
+                <td>Highlight the "perils" of LLMs as survey replacements, citing heuristic biases, cognitive misalignments, and conditional fidelity. Emphasize the need for rigorous, non-ad-hoc persona construction.</td>
+              </tr>
+              <tr>
+                <td><strong>Retrieval-Augmented Digital Twins</strong></td>
+                <td>Jia et al. (2026)</td>
+                <td>Demonstrate that digital twins built on survey histories reliably approximate human responses for stable traits, but struggle with high-variance or subjective queries.</td>
+              </tr>
+              <tr>
+                <td><strong>Conversational Synthetic</strong></td>
+                <td>Synthetic Users, DoppelIQ</td>
+                <td>Focus on qualitative interviews and open-ended concept validation. Often lack deep longitudinal grounding, risking generic or homogenized responses.</td>
+              </tr>
+              <tr>
+                <td><strong>Population-Grounded Simulation</strong></td>
+                <td>Ditto, simile ai</td>
+                <td>Target large-scale segmentation and society simulation. While achieving massive scale, empirical validation of individual-level alignment against specific subgroups remains an open challenge.</td>
+              </tr>
+              <tr>
+                <td><strong>Enterprise Survey Integration</strong></td>
+                <td>Qualtrics (Edge), YouGov (Yabble)</td>
+                <td>Enable side-by-side human/synthetic comparison. Primarily focus on survey logic testing rather than generating novel behavioral insights through deep embeddings.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 Publications -->
     <section class="section" id="sec-publications">
       <div class="section-inner">
-        <div class="section-eyebrow">01 &middot; Publications</div>
+        <div class="section-eyebrow">05 &middot; Publications</div>
         <h2 class="section-title">Published Work</h2>
         <p class="section-lead">
           The doctoral thesis builds on five peer-reviewed publications completed between 2024 and 2026.
@@ -819,10 +919,10 @@
       </div>
     </section>
 
-    <!-- 02 Research Questions -->
+    <!-- 06 Research Questions -->
     <section class="section" id="sec-rqs">
       <div class="section-inner">
-        <div class="section-eyebrow">02 &middot; Research Questions</div>
+        <div class="section-eyebrow">06 &middot; Research Questions</div>
         <h2 class="section-title">Core Research Questions</h2>
         <p class="section-lead">
           The thesis is structured around four research questions.
@@ -833,10 +933,10 @@
       </div>
     </section>
 
-    <!-- 03 Papers In Progress -->
+    <!-- 07 Planned Submissions -->
     <section class="section" id="sec-papers">
       <div class="section-inner">
-        <div class="section-eyebrow">03 &middot; Planned Submissions</div>
+        <div class="section-eyebrow">07 &middot; Planned Submissions</div>
         <h2 class="section-title">Papers In Progress</h2>
         <p class="section-lead">
           Four original papers are planned to complete the thesis, one per research question.
@@ -847,10 +947,10 @@
       </div>
     </section>
 
-    <!-- 04 Phase Board -->
+    <!-- 08 Phase Board -->
     <section class="section" id="sec-kanban">
       <div class="section-inner">
-        <div class="section-eyebrow">04 &middot; Phase Board</div>
+        <div class="section-eyebrow">08 &middot; Phase Board</div>
         <h2 class="section-title">PhD Phase Board</h2>
         <p class="section-lead">
           Each column represents one thesis phase.
@@ -862,10 +962,10 @@
       </div>
     </section>
 
-    <!-- 05 Roadmap -->
+    <!-- 09 Roadmap -->
     <section class="section" id="sec-roadmap">
       <div class="section-inner">
-        <div class="section-eyebrow">05 &middot; Roadmap</div>
+        <div class="section-eyebrow">09 &middot; Roadmap</div>
         <h2 class="section-title">Research Roadmap</h2>
         <p class="section-lead">
           The four phases of the doctoral program from Q3 2026 to mid 2027.
@@ -884,10 +984,10 @@
       </div>
     </section>
 
-    <!-- 06 Architecture -->
+    <!-- 10 System Architecture -->
     <section class="section" id="sec-architecture">
       <div class="section-inner">
-        <div class="section-eyebrow">06 &middot; System Artifact</div>
+        <div class="section-eyebrow">10 &middot; System Architecture</div>
         <h2 class="section-title">Twinlytics Platform</h2>
         <p class="section-lead">
           Twinlytics is the software artifact developed as part of this research.
@@ -898,10 +998,10 @@
       </div>
     </section>
 
-    <!-- 07 Committee -->
+    <!-- 11 Committee -->
     <section class="section" id="sec-committee">
       <div class="section-inner">
-        <div class="section-eyebrow">07 &middot; Committee</div>
+        <div class="section-eyebrow">11 &middot; Committee</div>
         <h2 class="section-title">Supervision and Next Steps</h2>
         <p class="section-lead">
           This section records the supervisory committee, the immediate action items for the next three months,
@@ -1236,6 +1336,10 @@
     ============================================================ */
     const NAV = [
       { id: "sec-dashboard",    label: "Dashboard",         icon: `<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>` },
+      { id: "sec-intro",        label: "Introduction",      icon: `<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>` },
+      { id: "sec-motivation",   label: "Motivation",        icon: `<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>` },
+      { id: "sec-vision",       label: "Vision",            icon: `<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>` },
+      { id: "sec-related",      label: "Related Work",      icon: `<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>` },
       { id: "sec-publications", label: "Publications",      icon: `<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>` },
       { id: "sec-rqs",          label: "Research Questions",icon: `<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>` },
       { id: "sec-papers",       label: "Papers In Progress",icon: `<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>` },
