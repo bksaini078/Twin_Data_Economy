@@ -367,6 +367,7 @@
     .ph-bar.running { background: var(--running); }
     .ph-bar.planned { background: var(--border); }
     .ph-bar.target  { background: var(--target-soft); }
+    .ph-bar.completed { background: var(--text-3); opacity: 0.35; }
     .phase-bar-labels { display: flex; gap: 5px; margin-top: 7px; }
     .ph-bar-label { flex: 1; font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; color: var(--text-3); text-align: center; }
 
@@ -507,10 +508,12 @@
     .kanban-col.running { border-top: 3px solid var(--running); }
     .kanban-col.planned { border-top: 3px solid var(--border-strong); }
     .kanban-col.target  { border-top: 3px solid var(--target); }
+    .kanban-col.completed { border-top: 3px solid var(--text-3); }
     .kanban-col-head { padding: 13px 14px 11px; border-bottom: 1px solid var(--border); }
     .kanban-col.running .kanban-col-head { background: var(--running-soft); }
     .kanban-col.planned .kanban-col-head { background: var(--card-alt); }
     .kanban-col.target  .kanban-col-head { background: var(--target-soft); }
+    .kanban-col.completed .kanban-col-head { background: var(--card-alt); opacity: 0.7; }
     .k-phase-label { font-family: 'JetBrains Mono', monospace; font-size: 0.57rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-3); margin-bottom: 2px; }
     .k-phase-name { font-family: 'Newsreader', serif; font-size: 0.9rem; font-weight: 600; color: var(--text); margin-bottom: 6px; }
     .k-phase-meta { display: flex; justify-content: space-between; align-items: center; gap: 4px; }
@@ -573,6 +576,7 @@
     .rm-node.running { border-color: var(--running); background: var(--running); color: #fff; }
     .rm-node.planned { border-color: var(--border-strong); background: var(--card); color: var(--text-3); }
     .rm-node.target  { border-color: var(--target); background: var(--card); color: var(--target); }
+    .rm-node.completed { border-color: var(--text-3); background: var(--card-alt); color: var(--text-2); }
 
     @keyframes nodePulse {
       0%   { box-shadow: 0 0 0 0 rgba(26,107,60,0.5); }
@@ -1213,8 +1217,9 @@
           period: "2024\u20132026",
           status: "completed",
           tasks: [
-            { name: "Publish DUPLet: Dynamic User Modeling (ACM UMAP 2026)", status: "completed", deadline: null },
-            { name: "Publish Virtual User Lab: Persona simulation (ACM UMAP 2026)", status: "completed", deadline: null },
+            { name: "Publish DUPLet: Dynamic User Modeling (ACM UMAP 2026) — DOI: 10.1145/3774935.3812726", status: "completed", deadline: null },
+            { name: "Publish Virtual User Lab: Persona simulation (ACM UMAP 2026) — DOI: 10.1145/3774935.3812731", status: "completed", deadline: null },
+            { name: "Publish Simulation of Human Survey Responses for Market Research (ACM CHI 2026) — DOI: 10.1145/3772363.3798991", status: "completed", deadline: null },
             { name: "Develop initial Twinlytics platform code architecture", status: "completed", deadline: null }
           ]
         },
