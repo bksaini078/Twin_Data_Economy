@@ -105,14 +105,15 @@
       position: fixed;
       top: 0; left: 0; right: 0;
       height: var(--topbar-h);
-      z-index: 100;
+      z-index: 90;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 24px;
+      padding: 0 24px 0 calc(var(--sidebar-w) + 24px);
       background: var(--panel);
       border-bottom: 1px solid var(--border);
       box-shadow: var(--shadow);
+      transition: padding-left 0.3s ease;
     }
     .topbar-left { display: flex; flex-direction: column; gap: 1px; }
     .topbar-title {
@@ -161,14 +162,14 @@
     ============================================================ */
     .sidebar {
       position: fixed;
-      top: var(--topbar-h); left: 0;
+      top: 0; left: 0;
       width: var(--sidebar-w);
-      height: calc(100vh - var(--topbar-h));
+      height: 100vh;
       background: var(--panel);
       border-right: 1px solid var(--border);
       display: flex;
       flex-direction: column;
-      z-index: 90;
+      z-index: 100;
       overflow-y: auto;
       transition: transform 0.3s ease;
     }
@@ -720,7 +721,12 @@
       .arch-flex { flex-wrap: wrap; border-radius: 10px; }
       .arch-stage { flex: 1 1 40%; }
       .arch-connector { display: none; }
-    }
+    body.sidebar-collapsed .sidebar { transform: translateX(-100%); }
+    body.sidebar-collapsed .topbar { padding-left: 24px; }
+    body.sidebar-collapsed #sidebar-open-btn { display: flex !important; }
+    body.sidebar-collapsed .main { margin-left: 0; width: 100vw; }
+    body.sidebar-collapsed .section { min-width: 100vw; }
+
     @media (max-width: 960px) {
       .section { padding: 32px 28px 44px; }
       .kpi-grid { grid-template-columns: repeat(2, 1fr); }
@@ -746,8 +752,8 @@
        TOPBAR
   ==================================================== -->
   <header class="topbar">
-    <div class="topbar-left" style="display: flex; align-items: center; gap: 14px;">
-      <button class="icon-btn" id="sidebar-toggle-btn" onclick="toggleSidebar()" title="Toggle navigation sidebar" aria-label="Toggle sidebar">
+    <div class="topbar-left" style="display: flex; align-items: center; gap: 12px;">
+      <button class="icon-btn" id="sidebar-open-btn" onclick="toggleSidebar()" title="Expand navigation sidebar" aria-label="Expand sidebar" style="display: none;">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </button>
       <div>
@@ -767,9 +773,14 @@
        SIDEBAR
   ==================================================== -->
   <nav class="sidebar" aria-label="Research sections">
-    <div class="sb-brand">
-      <div class="sb-name">Bhupender Kumar Saini</div>
-      <div class="sb-role">Applied AI Researcher</div>
+    <div class="sb-brand" style="display: flex; flex-direction: row; align-items: center; justify-content: space-between;">
+      <div>
+        <div class="sb-name">Bhupender Kumar Saini</div>
+        <div class="sb-role">Applied AI Researcher</div>
+      </div>
+      <button class="icon-btn" onclick="toggleSidebar()" title="Collapse sidebar" aria-label="Collapse sidebar" style="width: 28px; height: 28px; padding: 0; border: none; background: transparent;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
     </div>
     <div class="sb-nav" id="sb-nav"></div>
     <div class="sb-footer">
@@ -791,8 +802,7 @@
     <section class="section" id="sec-dashboard">
       <div class="section-inner">
         <div class="section-eyebrow">00 &middot; Overview</div>
-        <h1 class="section-title">PhD Research Dashboard</h1>
-        <h3 class="thesis-title" id="thesis-title" style="font-family: 'Newsreader', serif; font-size: 1.35rem; font-weight: 500; color: var(--text-2); margin-top: -12px; margin-bottom: 24px;"></h3>
+        <h1 class="section-title">Human Digital Twins for Enterprise Decision Support</h1>
         <p class="section-lead" id="dash-lead"></p>
         <div class="kpi-grid" id="kpi-grid"></div>
         <div class="phase-prog-card">
