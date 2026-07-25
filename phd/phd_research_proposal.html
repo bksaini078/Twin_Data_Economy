@@ -798,7 +798,7 @@
         <div class="section-eyebrow">01 &middot; Introduction</div>
         <h2 class="section-title">The Data Exhaustion Crisis and Synthetic Methodologies</h2>
         <p class="section-lead">
-          The proliferation of Large Language Models (LLMs) has precipitated a structural shift in how behavioral data is generated and consumed. As AI-generated material increasingly saturates the active web corpus (estimated at 30-40%), the risk of a "model collapse" loop—where models train on synthetic artifacts rather than ground-truth human behavior—has become acute. Concurrently, behavioral research faces a fidelity crisis, as traditional methods struggle to capture the nuance of diverse human populations at scale. This research addresses the critical need for scientifically grounded, high-fidelity human data pipelines in the age of generative AI.
+          The proliferation of Large Language Models (LLMs) has precipitated a structural shift in how behavioral data is generated and consumed. As AI-generated material increasingly saturates the active web corpus (estimated at 30% to 40%), the risk of a model collapse loop (where models train on synthetic artifacts rather than ground-truth human behavior) has become acute. Concurrently, behavioral research faces a fidelity crisis, as traditional methods struggle to capture the nuance of diverse human populations at scale. This research addresses the critical need for scientifically grounded, high-fidelity human data pipelines in the age of generative AI.
         </p>
       </div>
     </section>
@@ -814,15 +814,15 @@
         <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; margin-top: 32px;">
           <div class="rq-card" style="background: var(--panel);">
             <h4 style="color: var(--accent); margin-bottom: 12px; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;">1. Non-Consensual Extraction</h4>
-            <p style="font-size: 0.95rem; color: var(--text-2);">Platforms harvest behavioral signals (clicks, sentiment, purchases) without explicit user consent or compensation. This paradigm is increasingly untenable under tightening global regulatory frameworks (e.g., GDPR) and eroding public trust.</p>
+            <p style="font-size: 0.95rem; color: var(--text-2);">Platforms harvest behavioral signals without explicit user consent. Empirical data indicates that approximately 74% to 82% of consumers report feeling a loss of control over their data. This paradigm is increasingly untenable under tightening global regulatory frameworks.</p>
           </div>
           <div class="rq-card" style="background: var(--panel);">
             <h4 style="color: var(--accent); margin-bottom: 12px; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;">2. Shallow Market Research</h4>
-            <p style="font-size: 0.95rem; color: var(--text-2);">Traditional survey methodologies rely on generic, static personas and inherently small sample sizes (N=10–50), systematically failing to capture the longitudinal dynamics and nuanced variance of real human behavior.</p>
+            <p style="font-size: 0.95rem; color: var(--text-2);">Traditional survey methodologies rely on generic, static personas and inherently small sample sizes. They systematically fail to capture the longitudinal dynamics and nuanced variance of real human behavior.</p>
           </div>
           <div class="rq-card" style="background: var(--panel);">
             <h4 style="color: var(--accent); margin-bottom: 12px; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;">3. The Fidelity Gap</h4>
-            <p style="font-size: 0.95rem; color: var(--text-2);">While synthetic data generation using LLMs is accelerating, empirical evidence indicates that without rich, longitudinal psychological grounding, synthetic participants exhibit substantial alignment gaps and heuristic biases compared to their human counterparts.</p>
+            <p style="font-size: 0.95rem; color: var(--text-2);">While synthetic data generation using LLMs is accelerating, empirical evidence indicates that without rich psychological grounding, synthetic participants exhibit substantial alignment gaps and heuristic biases compared to their human counterparts (<a href="https://doi.org/10.1017/pan.2024.5" target="_blank" rel="noopener">Bisbee et al., 2024</a>).</p>
           </div>
         </div>
       </div>
@@ -834,10 +834,10 @@
         <div class="section-eyebrow">03 &middot; Vision</div>
         <h2 class="section-title">A Consensual, Participatory Data Architecture</h2>
         <p class="section-lead">
-          This research proposes a paradigm shift toward a participatory behavioral data architecture. Instead of covert extraction, the model relies on explicit consent and meritocratic compensation.
+          This research proposes a paradigm shift toward a participatory behavioral data architecture. Instead of covert extraction, the model relies on explicit consent and data ownership.
         </p>
         <p style="font-size: 1.05rem; color: var(--text); margin-top: 20px; line-height: 1.7;">
-          By empowering individuals to own and selectively provision access to their digital twins—constructed via privacy-preserving, longitudinal embeddings of their authentic micro-behaviors (preferences, moods, choices)—we can generate high-fidelity, auditable synthetic panels. This approach theoretically aligns methodological rigor with ethical data sovereignty, allowing researchers to query behavioral models at scale (N=10,000+) while ensuring that the humans who supply the foundational ground-truth data participate directly in its value generation.
+          By empowering individuals to own and selectively provision access to their digital twins (constructed via privacy-preserving, longitudinal embeddings of their authentic micro-behaviors), we can generate high-fidelity, auditable synthetic panels. This approach theoretically aligns methodological rigor with ethical data sovereignty, allowing researchers to query behavioral models at scale while ensuring that the humans who supply the foundational ground-truth data retain control.
         </p>
       </div>
     </section>
@@ -848,7 +848,7 @@
         <div class="section-eyebrow">04 &middot; Related Work</div>
         <h2 class="section-title">Synthetic Data and Agentic Simulation Landscape</h2>
         <p class="section-lead">
-          The rapidly evolving landscape of synthetic respondents is characterized by varying methodological approaches and degrees of human grounding.
+          The rapidly evolving landscape of synthetic respondents is characterized by varying methodological approaches and degrees of human grounding. Recent academic literature has highlighted severe systematic limitations in uncalibrated LLM persona simulations.
         </p>
         
         <div class="pub-table-wrap" style="margin-top: 32px;">
@@ -856,35 +856,42 @@
             <thead>
               <tr>
                 <th>Approach / Typology</th>
-                <th>Notable Platforms &amp; Research</th>
+                <th>Notable Research &amp; Literature</th>
                 <th>Methodological Limitations &amp; Findings</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td><strong>Systematic Critiques of Synthetic Data</strong></td>
-                <td>Bisbee et al. (2024); Kuric et al. (2026)</td>
-                <td>Highlight the "perils" of LLMs as survey replacements, citing heuristic biases, cognitive misalignments, and conditional fidelity. Emphasize the need for rigorous, non-ad-hoc persona construction.</td>
+                <td>
+                  <a href="https://doi.org/10.1017/pan.2024.5" target="_blank" rel="noopener">Bisbee et al. (2024)</a>; 
+                  <a href="https://doi.org/10.21203/rs.3.rs-9057643/v1" target="_blank" rel="noopener">Kuric et al. (2026)</a>
+                </td>
+                <td>Highlight the perils of LLMs as survey replacements, citing heuristic biases, cognitive misalignments, and conditional fidelity. Emphasize the need for rigorous persona construction.</td>
               </tr>
               <tr>
-                <td><strong>Retrieval-Augmented Digital Twins</strong></td>
-                <td>Jia et al. (2026)</td>
+                <td><strong>Distortion in Digital Twins</strong></td>
+                <td>
+                  <a href="https://doi.org/10.48550/arXiv.2509.19088" target="_blank" rel="noopener">Peng et al. (2026)</a>
+                </td>
+                <td>Identify five systematic distortions in LLM-based digital twins: insufficient individuation, stereotyping, representation bias, ideological bias, and hyper-rationality.</td>
+              </tr>
+              <tr>
+                <td><strong>Retrieval-Augmented Personas</strong></td>
+                <td>
+                  <a href="https://doi.org/10.48550/arXiv.2605.10659" target="_blank" rel="noopener">Jia et al. (2026)</a>
+                </td>
                 <td>Demonstrate that digital twins built on survey histories reliably approximate human responses for stable traits, but struggle with high-variance or subjective queries.</td>
               </tr>
               <tr>
                 <td><strong>Conversational Synthetic</strong></td>
-                <td>Synthetic Users, DoppelIQ</td>
+                <td>Commercial frameworks (e.g., Synthetic Users)</td>
                 <td>Focus on qualitative interviews and open-ended concept validation. Often lack deep longitudinal grounding, risking generic or homogenized responses.</td>
               </tr>
               <tr>
                 <td><strong>Population-Grounded Simulation</strong></td>
-                <td>Ditto, simile ai</td>
+                <td>Commercial frameworks (e.g., Ditto, Simile AI)</td>
                 <td>Target large-scale segmentation and society simulation. While achieving massive scale, empirical validation of individual-level alignment against specific subgroups remains an open challenge.</td>
-              </tr>
-              <tr>
-                <td><strong>Enterprise Survey Integration</strong></td>
-                <td>Qualtrics (Edge), YouGov (Yabble)</td>
-                <td>Enable side-by-side human/synthetic comparison. Primarily focus on survey logic testing rather than generating novel behavioral insights through deep embeddings.</td>
               </tr>
             </tbody>
           </table>
