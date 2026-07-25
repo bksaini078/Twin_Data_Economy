@@ -409,7 +409,7 @@
     /* ============================================================
        RESEARCH QUESTIONS
     ============================================================ */
-    .rq-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .rq-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
     .rq-card {
       background: var(--card);
       border: 1px solid var(--border);
@@ -423,10 +423,12 @@
     .rq-c1 { border-left-color: var(--info); }
     .rq-c2 { border-left-color: var(--warn); }
     .rq-c3 { border-left-color: var(--running); }
+    .rq-c4 { border-left-color: var(--target); }
     .rq-id { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 9px; }
     .rq-c1 .rq-id { color: var(--info); }
     .rq-c2 .rq-id { color: var(--warn); }
     .rq-c3 .rq-id { color: var(--running); }
+    .rq-c4 .rq-id { color: var(--target); }
     .rq-q { font-family: 'Newsreader', serif; font-size: 0.95rem; font-weight: 600; font-style: italic; color: var(--text); line-height: 1.48; margin-bottom: 13px; }
     .rq-tasks { list-style: none; display: flex; flex-direction: column; gap: 7px; }
     .rq-tasks li { font-size: 0.8rem; color: var(--text-2); line-height: 1.48; padding-left: 14px; position: relative; }
@@ -435,7 +437,7 @@
     /* ============================================================
        PAPERS IN PROGRESS
     ============================================================ */
-    .papers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .papers-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
     .paper-card {
       background: var(--card);
       border: 1px solid var(--border);
@@ -799,8 +801,8 @@
         <div class="section-eyebrow">02 &middot; Research Questions</div>
         <h2 class="section-title">Core Research Questions</h2>
         <p class="section-lead">
-          The thesis is structured around three research questions.
-          Each question targets a distinct layer of the problem: technical correctness, practical utility, and economic viability.
+          The thesis is structured around four research questions.
+          RQ1 addresses technical distortion. RQ2 covers stakeholder requirements. RQ3 is the platform evaluation. RQ4 examines the data economy and governance model.
           Each question corresponds to one planned publication.
         </p>
         <div class="rq-grid" id="rq-grid"></div>
@@ -813,8 +815,8 @@
         <div class="section-eyebrow">03 &middot; Planned Submissions</div>
         <h2 class="section-title">Papers In Progress</h2>
         <p class="section-lead">
-          Three original papers are planned to complete the thesis.
-          Each paper addresses one research question.
+          Four original papers are planned to complete the thesis, one per research question.
+          Paper 2 (requirements) and Paper 3 (evaluation) are sequenced intentionally: requirements inform the platform configuration before evaluation begins.
           Deadlines marked in orange are within 60 days of today.
         </p>
         <div class="papers-grid" id="papers-grid"></div>
@@ -1025,28 +1027,37 @@
         {
           id: "RQ 1",
           colorClass: "rq-c1",
-          question: "What systematic response distortions and biases emerge in LLM persona simulation, and how can they be mitigated?",
+          question: "In enterprise survey simulation, what novel distortion patterns emerge beyond general LLM persona literature, and how much can behavioral grounding from personal logs reduce measured distortion?",
           tasks: [
-            "Quantifying prompt sensitivity, cognitive bias propagation, and hallucination bounds in simulated survey responses",
-            "Formulating technical grounding bounds and memory retrieval mechanisms to maximize response fidelity"
+            "Categorizing cognitive bias propagation, variance collapse, and hallucination bounds specific to enterprise panel contexts",
+            "Measuring distortion reduction achieved by grounding mechanisms using personal reflective logs as the treatment variable"
           ]
         },
         {
           id: "RQ 2",
           colorClass: "rq-c2",
-          question: "What are enterprise stakeholder requirements, and how does Twinlytics perform compared to traditional panels?",
+          question: "What are the functional and non-functional requirements of enterprise stakeholders for an AI-powered human digital twin simulation platform, and what design principles should govern its development?",
           tasks: [
-            "Conducting 15 to 20 semi-structured interviews with enterprise innovation managers and market researchers",
-            "Running a controlled empirical pilot comparing Twinlytics against traditional survey panels"
+            "Conducting 15 to 20 semi-structured interviews with enterprise innovation managers, product managers, and market research leads",
+            "Applying qualitative thematic analysis to extract validated requirements clusters and design principles for Twinlytics"
           ]
         },
         {
           id: "RQ 3",
           colorClass: "rq-c3",
-          question: "What new business values, market opportunities, and economic viability models emerge from human-controlled AI twins?",
+          question: "How does Twinlytics, configured according to stakeholder-derived design principles, perform compared to traditional crowdsourced survey panels in insight quality, decision confidence, and time efficiency?",
           tasks: [
-            "Mapping novel enterprise and consumer use cases for human digital twins",
-            "Assessing value capture architectures, zero-knowledge data sharing, and micro-licensing economic models"
+            "Running a controlled empirical pilot comparing Twinlytics against Prolific Academic panels with pre-specified dependent variables",
+            "Measuring insight quality (inter-rater reliability), decision confidence (validated scale), and time-to-insight (stopwatch metric)"
+          ]
+        },
+        {
+          id: "RQ 4",
+          colorClass: "rq-c4",
+          question: "Under what conditions are consent-based human digital twin data markets economically viable, and what governance architecture is required to ensure user ownership and prevent market failure?",
+          tasks: [
+            "Mapping enterprise and consumer use case taxonomy for human behavioral twins",
+            "Formalizing a consent-first governance architecture and assessing economic viability conditions for micro-licensing data markets"
           ]
         }
       ],
@@ -1054,33 +1065,43 @@
       papers_planned: [
         {
           id: "P1",
-          title: "Technical Distortion Analysis and Mitigation in LLM Persona Simulation",
+          title: "Technical Distortion Analysis and Mitigation in LLM Persona Simulation for Enterprise Survey Panels",
           status: "running",
           venue: "ACM IUI 2027",
           venue_location: "Helsinki, Feb 2027",
           deadline_str: "Aug 20, 2026",
           deadline_date: "2026-08-20",
-          focus: "Categorizing cognitive bias propagation and response skew in LLM-simulated survey panels, and proposing algorithmic mitigation frameworks."
+          focus: "Categorizing domain-specific cognitive bias and variance collapse in LLM-simulated enterprise panels. Grounding from personal reflective logs as the treatment variable."
         },
         {
           id: "P2",
-          title: "Requirement Gathering and Twinlytics Platform Evaluation",
+          title: "Stakeholder Requirements for Human Digital Twin Simulation Platforms: A Qualitative Study",
           status: "planned",
-          venue: "ECIS 2027",
-          venue_location: "Luxembourg, May 2027",
-          deadline_str: "Nov 20, 2026",
+          venue: "ACM CSCW 2027",
+          venue_location: "Rolling deadline",
+          deadline_str: "Submit when ready",
           deadline_date: "2026-11-20",
-          focus: "Stakeholder interviews (n = 15 to 20) and a comparative empirical pilot evaluating Twinlytics against traditional panel methods."
+          focus: "Thematic analysis of 15 to 20 semi-structured interviews with enterprise stakeholders to derive validated design principles for Twinlytics."
         },
         {
           id: "P3",
-          title: "Human Digital Twin Use Cases, Business Value and Twin Economics",
+          title: "Twinlytics vs. Traditional Panels: A Controlled Empirical Evaluation of Insight Quality and Decision Confidence",
           status: "planned",
-          venue: "IPDMC 2027",
-          venue_location: "June 2027",
+          venue: "ACM DIS 2027",
+          venue_location: "Stockholm, Jun 2027",
+          deadline_str: "Jan 18, 2027",
+          deadline_date: "2027-01-18",
+          focus: "Controlled pilot comparing Twinlytics against Prolific Academic panels. Dependent variables: insight quality (Cohen's kappa), decision confidence (validated scale), time-to-insight."
+        },
+        {
+          id: "P4",
+          title: "Consent-First Data Markets for Human Digital Twins: Use Cases, Viability, and Governance Architecture",
+          status: "planned",
+          venue: "ACM FAccT 2027",
+          venue_location: "Jun 2027",
           deadline_str: "Jan 20, 2027",
           deadline_date: "2027-01-20",
-          focus: "Formalizing digital twin enterprise and consumer use cases, value creation mechanisms, and economic viability."
+          focus: "Formalizing a consent-first governance architecture for human twin data markets. Use case taxonomy, economic viability conditions, and micro-licensing model."
         }
       ],
 
@@ -1100,37 +1121,50 @@
         {
           id: 2,
           name: "Phase 2",
-          subtitle: "Stakeholder Research",
-          period: "Q3-Q4 2026",
+          subtitle: "Requirements Study",
+          period: "Q3\u2013Q4 2026",
           status: "planned",
           tasks: [
-            { name: "Finalize stakeholder interview protocol", status: "planned", deadline: null },
+            { name: "Finalize semi-structured interview protocol", status: "planned", deadline: null },
             { name: "Conduct 15 to 20 stakeholder interviews", status: "planned", deadline: null },
-            { name: "Run Twinlytics versus panel pilot study", status: "planned", deadline: null },
-            { name: "Submit Paper 2 to ECIS 2027", status: "planned", deadline: "Nov 20, 2026" }
+            { name: "Thematic analysis and design principle extraction", status: "planned", deadline: null },
+            { name: "Submit Paper 2 to ACM CSCW (rolling)", status: "planned", deadline: "Nov 2026" }
           ]
         },
         {
           id: 3,
           name: "Phase 3",
-          subtitle: "Twin Economics",
-          period: "Q1-Q2 2027",
+          subtitle: "Platform Evaluation",
+          period: "Q4 2026\u2013Q1 2027",
           status: "planned",
           tasks: [
-            { name: "Formalize digital twin use case taxonomy", status: "planned", deadline: null },
-            { name: "Economic viability model and feasibility analysis", status: "planned", deadline: null },
-            { name: "Submit Paper 3 to IPDMC 2027", status: "planned", deadline: "Jan 20, 2027" }
+            { name: "Configure Twinlytics for pilot using P2 design principles", status: "planned", deadline: null },
+            { name: "Run controlled pilot vs. Prolific Academic panels", status: "planned", deadline: null },
+            { name: "Statistical analysis of insight quality and decision confidence", status: "planned", deadline: null },
+            { name: "Submit Paper 3 to ACM DIS 2027", status: "planned", deadline: "Jan 18, 2027" }
           ]
         },
         {
           id: 4,
           name: "Phase 4",
+          subtitle: "Twin Economics",
+          period: "Q1\u2013Q2 2027",
+          status: "planned",
+          tasks: [
+            { name: "Formalize use case taxonomy and consent-first governance model", status: "planned", deadline: null },
+            { name: "Economic viability conditions and feasibility analysis", status: "planned", deadline: null },
+            { name: "Submit Paper 4 to ACM FAccT 2027", status: "planned", deadline: "Jan 20, 2027" }
+          ]
+        },
+        {
+          id: 5,
+          name: "Phase 5",
           subtitle: "Thesis and Defense",
           period: "Mid 2027",
           status: "target",
           tasks: [
             { name: "Collate cumulative doctoral thesis document", status: "planned", deadline: null },
-            { name: "Synthesize cross-study insights", status: "planned", deadline: null },
+            { name: "Synthesize cross-study insights and design principles", status: "planned", deadline: null },
             { name: "Committee review and revision", status: "planned", deadline: null },
             { name: "Oral defense", status: "planned", deadline: "Mid 2027" }
           ]
@@ -1162,14 +1196,14 @@
 
       next_steps: [
         "Finalize dataset analysis and complete Paper 1 draft for ACM IUI 2027. Submission deadline: August 20, 2026.",
-        "Finalize semi-structured interview protocol for stakeholder needs evaluation (n = 15 to 20 participants).",
-        "Configure Twinlytics platform parameters for the comparative pilot evaluation against traditional survey panels."
+        "Design and finalize semi-structured interview protocol for stakeholder requirements study (Paper 2, n = 15 to 20 participants).",
+        "Define pilot evaluation protocol for Paper 3: confirm Prolific Academic as comparator baseline and operationalize dependent variables."
       ],
 
       committee_topics: [
-        "Refinement of the stakeholder interview guide protocol.",
-        "Strategic selection of secondary target tracks: ACM CHI 2027 vs. ACM UMAP 2027 vs. ECIS 2027.",
-        "Finalizing data sharing and differential privacy governance assumptions for Paper 3."
+        "Confirm whether Paper 2 (requirements) and Paper 3 (evaluation) should be submitted to the same or different venues.",
+        "Refinement of the stakeholder interview guide: sector focus (FMCG, digital health, or cross-sector).",
+        "Finalizing consent-first data governance model and privacy assumptions for Paper 4 (FAccT vs. IS journal)."
       ]
     };
 
@@ -1214,12 +1248,13 @@
 
       const kpis = [
         { label: 'Published Papers',    val: DATA.publications.length,       sub: 'ACM CHI, UMAP, Springer, IPDMC', cls: 'accent-top' },
-        { label: 'Papers Planned',      val: DATA.papers_planned.length,     sub: 'To complete the thesis requirements', cls: 'accent-top' },
+        { label: 'Papers Planned',      val: DATA.papers_planned.length,     sub: 'IUI, CSCW, DIS, FAccT \u00b7 RQ1\u2013RQ4', cls: 'accent-top' },
         { label: 'Target Defense',      val: DATA.meta.completion,           sub: 'Cumulative thesis format', cls: 'accent-top' },
         { label: 'Primary Supervisors', val: DATA.supervision.primary.length, sub: DATA.supervision.primary.map(s => s.name.split(' ').slice(-2).join(' ')).join(', '), cls: 'accent-top' },
         { label: 'Active Phase',        val: 'Phase ' + DATA.meta.current_phase_id, sub: curPhase ? curPhase.subtitle : '', cls: 'running-top' },
         { label: 'P1 Deadline',         val: dLabel, sub: DATA.papers_planned[0].deadline_str + ' \u00b7 ' + DATA.papers_planned[0].venue, cls: urgent ? 'warn-top' : 'accent-top' }
       ];
+
 
       document.getElementById('kpi-grid').innerHTML = kpis.map(k =>
         '<div class="kpi-card ' + k.cls + '">'
