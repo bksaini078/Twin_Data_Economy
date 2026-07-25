@@ -714,6 +714,15 @@
     .researcher-link:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
 
     /* ============================================================
+       COLLAPSIBLE SIDEBAR RULES
+    ============================================================ */
+    body.sidebar-collapsed .sidebar { transform: translateX(-100%); }
+    body.sidebar-collapsed .topbar { padding-left: 24px; }
+    body.sidebar-collapsed #sidebar-open-btn { display: flex !important; }
+    body.sidebar-collapsed .main { margin-left: 0; width: 100vw; }
+    body.sidebar-collapsed .section { min-width: 100vw; }
+
+    /* ============================================================
        RESPONSIVE
     ============================================================ */
     @media (max-width: 1200px) {
@@ -721,11 +730,7 @@
       .arch-flex { flex-wrap: wrap; border-radius: 10px; }
       .arch-stage { flex: 1 1 40%; }
       .arch-connector { display: none; }
-    body.sidebar-collapsed .sidebar { transform: translateX(-100%); }
-    body.sidebar-collapsed .topbar { padding-left: 24px; }
-    body.sidebar-collapsed #sidebar-open-btn { display: flex !important; }
-    body.sidebar-collapsed .main { margin-left: 0; width: 100vw; }
-    body.sidebar-collapsed .section { min-width: 100vw; }
+    }
 
     @media (max-width: 960px) {
       .section { padding: 32px 28px 44px; }
