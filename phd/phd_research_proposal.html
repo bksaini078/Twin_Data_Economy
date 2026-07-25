@@ -73,13 +73,16 @@
        RESET
     ============================================================ */
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { font-size: 15px; scroll-behavior: smooth; }
+    html { font-size: 15px; overflow: hidden; height: 100%; }
     body {
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
       background: var(--bg);
       color: var(--text);
       line-height: 1.6;
       transition: background 0.3s, color 0.3s;
+      height: 100%;
+      overflow: hidden;
+      margin: 0;
     }
     a { color: var(--accent); text-decoration: none; }
     a:hover { text-decoration: underline; }
@@ -219,9 +222,30 @@
     /* ============================================================
        MAIN CONTENT
     ============================================================ */
-    .main { margin-left: var(--sidebar-w); padding-top: var(--topbar-h); }
-    .section { padding: 44px 48px 60px; border-bottom: 1px solid var(--border); }
-    .section:last-child { border-bottom: none; }
+    .main { 
+      margin-left: var(--sidebar-w); 
+      padding-top: var(--topbar-h); 
+      height: 100vh;
+      width: calc(100vw - var(--sidebar-w));
+      display: flex;
+      flex-direction: row;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      box-sizing: border-box;
+    }
+    .section { 
+      min-width: calc(100vw - var(--sidebar-w)); 
+      height: calc(100vh - var(--topbar-h));
+      padding: 44px 48px 60px; 
+      border-right: 1px solid var(--border); 
+      border-bottom: none;
+      scroll-snap-align: start;
+      overflow-y: auto;
+      box-sizing: border-box;
+    }
+    .section:last-child { border-right: none; }
     .section-inner { max-width: 1040px; }
     .section-eyebrow {
       font-family: 'JetBrains Mono', monospace;
@@ -1027,10 +1051,10 @@
         {
           id: "RQ 1",
           colorClass: "rq-c1",
-          question: "In enterprise survey simulation, what novel distortion patterns emerge beyond general LLM persona literature, and how much can behavioral grounding from personal logs reduce measured distortion?",
+          question: "How do different context layers (from generic to full psychological profiling) impact individual-level simulation fidelity and variance calibration across different survey formats?",
           tasks: [
-            "Categorizing cognitive bias propagation, variance collapse, and hallucination bounds specific to enterprise panel contexts",
-            "Measuring distortion reduction achieved by grounding mechanisms using personal reflective logs as the treatment variable"
+            "Evaluating seven context strategies against a six-week longitudinal dataset (n=14) across five question formats (Likert, single/multi-select, ranking, open text)",
+            "Introducing the Cross-Format Comparability Index (CFCI) to unify evaluation metrics and conducting a participant validation study on felt authenticity"
           ]
         },
         {
@@ -1065,13 +1089,13 @@
       papers_planned: [
         {
           id: "P1",
-          title: "Technical Distortion Analysis and Mitigation in LLM Persona Simulation for Enterprise Survey Panels",
+          title: "Beyond the Average Human: Measuring Individual Fidelity and Felt Authenticity in Agentic Human Digital Twins",
           status: "running",
           venue: "ACM IUI 2027",
           venue_location: "Helsinki, Feb 2027",
           deadline_str: "Aug 20, 2026",
           deadline_date: "2026-08-20",
-          focus: "Categorizing domain-specific cognitive bias and variance collapse in LLM-simulated enterprise panels. Grounding from personal reflective logs as the treatment variable."
+          focus: "Systematic evaluation of 7 context strategies on a 6-week longitudinal dataset (n=14, 96 questions). Introduces CFCI for cross-format evaluation. Shows ISA reaches 69.9% alignment, with multi-select seeing highest gains. Participant validation highlights idiolect modelling as the next frontier."
         },
         {
           id: "P2",
@@ -1113,8 +1137,8 @@
           period: "Q3 2026",
           status: "running",
           tasks: [
-            { name: "Dataset analysis for bias and distortion study", status: "running", deadline: null },
-            { name: "Paper 1 manuscript and review preparation", status: "running", deadline: null },
+            { name: "Finalize longitudinal dataset analysis (n=14) and calculate CFCI metrics", status: "running", deadline: null },
+            { name: "Paper 1 manuscript drafting and internal review", status: "running", deadline: null },
             { name: "Submit Paper 1 to ACM IUI 2027", status: "planned", deadline: "Aug 20, 2026" }
           ]
         },
@@ -1195,7 +1219,7 @@
       ],
 
       next_steps: [
-        "Finalize dataset analysis and complete Paper 1 draft for ACM IUI 2027. Submission deadline: August 20, 2026.",
+        "Finalize longitudinal dataset analysis (n=14) and CFCI calculations for Paper 1. Submission deadline: August 20, 2026.",
         "Design and finalize semi-structured interview protocol for stakeholder requirements study (Paper 2, n = 15 to 20 participants).",
         "Define pilot evaluation protocol for Paper 3: confirm Prolific Academic as comparator baseline and operationalize dependent variables."
       ],
@@ -1489,7 +1513,14 @@
     ============================================================ */
     function jumpTo(e, id) {
       e.preventDefault();
-      document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+      var el = document.getElementById(id);
+      if (el) {
+        var mainContainer = document.querySelector('.main');
+        mainContainer.scrollTo({
+          left: el.offsetLeft - mainContainer.offsetLeft,
+          behavior: 'smooth'
+        });
+      }
     }
 
     function highlightKanbanCol(phaseId) {
@@ -1503,6 +1534,7 @@
     }
 
     function initScrollspy() {
+      var mainContainer = document.querySelector('.main');
       var sections = NAV.map(function(n) { return document.getElementById(n.id); }).filter(Boolean);
       var links    = document.querySelectorAll('.nav-item');
       var io = new IntersectionObserver(function(entries) {
@@ -1513,8 +1545,36 @@
             if (a) a.classList.add('active');
           }
         });
-      }, { rootMargin: '-12% 0px -80% 0px', threshold: 0 });
+      }, { root: mainContainer, rootMargin: '0px -50% 0px -50%', threshold: 0 });
       sections.forEach(function(s) { io.observe(s); });
+    }
+
+    function initWheelScroll() {
+      var mainEl = document.querySelector('.main');
+      mainEl.addEventListener('wheel', function(e) {
+        if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+          var target = e.target;
+          var canScrollVertical = false;
+          while (target && target !== mainEl) {
+            if (target.scrollHeight > target.clientHeight) {
+               var style = window.getComputedStyle(target);
+               if (style.overflowY === 'auto' || style.overflowY === 'scroll') {
+                 if (e.deltaY > 0 && target.scrollTop + target.clientHeight < target.scrollHeight) {
+                   canScrollVertical = true; break;
+                 }
+                 if (e.deltaY < 0 && target.scrollTop > 0) {
+                   canScrollVertical = true; break;
+                 }
+               }
+            }
+            target = target.parentNode;
+          }
+          if (!canScrollVertical) {
+            e.preventDefault();
+            mainEl.scrollBy({ left: e.deltaY, behavior: 'auto' });
+          }
+        }
+      }, { passive: false });
     }
 
     /* ============================================================
@@ -1549,8 +1609,9 @@
       renderRoadmap();
       renderArchitecture();
       renderCommittee();
-      requestAnimationFrame(renderCharts);
       initScrollspy();
+      initWheelScroll();
+      requestAnimationFrame(renderCharts);
     }
 
     document.addEventListener('DOMContentLoaded', init);
