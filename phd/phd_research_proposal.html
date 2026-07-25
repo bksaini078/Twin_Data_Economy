@@ -1378,7 +1378,8 @@
 
     function renderKPIs() {
       document.getElementById('updated-badge').textContent = 'Updated: ' + DATA.meta.updated;
-      document.getElementById('thesis-title').textContent = 'Thesis: ' + DATA.meta.title;
+      var tt = document.getElementById('thesis-title');
+      if (tt) tt.textContent = 'Thesis: ' + DATA.meta.title;
       document.getElementById('dash-lead').textContent =
         'I am ' + DATA.meta.candidate + ', a doctoral candidate at ' + DATA.meta.institution + '. '
         + 'This page is my personal record of the research as it progresses toward a '
