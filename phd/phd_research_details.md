@@ -1,4 +1,4 @@
-# Human Digital Twins for Market Research and Enterprise Decision Support
+# Agentic AI and Human Digital Twin Systems for Market Research and Enterprise Decision Support
 
 > **Doctoral Status Report & Research Summary**  
 > **Last Updated:** August 22, 2026  
