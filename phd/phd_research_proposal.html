@@ -800,7 +800,7 @@
     <section class="section" id="sec-dashboard">
       <div class="section-inner">
         <div class="section-eyebrow">00 &middot; Overview</div>
-        <h1 class="section-title">Human Digital Twins for Enterprise Decision Support</h1>
+        <h1 class="section-title">Human Digital Twins for Market Research and Enterprise Decision Support</h1>
         <p class="section-lead" id="dash-lead"></p>
         <div class="kpi-grid" id="kpi-grid"></div>
         <div class="phase-prog-card">
@@ -937,9 +937,10 @@
         <div class="section-eyebrow">05 &middot; Research Questions</div>
         <h2 class="section-title">Core Research Questions</h2>
         <p class="section-lead">
-          The thesis is structured around four research questions.
-          RQ1 addresses technical distortion. RQ2 covers stakeholder requirements. RQ3 is the platform evaluation. RQ4 examines the data economy and governance model.
-          Each question corresponds to one planned publication.
+          The thesis is structured around three research questions spanning agentic AI system design, simulation fidelity, platform validation, and the emerging twin data economy.
+          RQ1 covers the full arc from agentic AI requirements to simulation distortion and mitigation (anchored by Papers 1–5 and P1).
+          RQ2 addresses platform requirements gathering and empirical evaluation against traditional approaches (P2).
+          RQ3 examines business value, enterprise use cases, and governance in the twin data economy (P3).
         </p>
         <div class="rq-grid" id="rq-grid"></div>
       </div>
@@ -990,9 +991,9 @@
         <div class="section-eyebrow">08 &middot; Planned Submissions</div>
         <h2 class="section-title">Papers In Progress</h2>
         <p class="section-lead">
-          Four original papers are planned to complete the thesis, one per research question.
-          Paper 2 (requirements) and Paper 3 (evaluation) are sequenced intentionally: requirements inform the platform configuration before evaluation begins.
-          Deadlines marked in orange are within 60 days of today.
+          Three original papers complete the thesis, one per research question.
+          P1 is submitted. P2 (stakeholder interviews) targets ECIS 2027 (Oct 30). P3 (twin economics) targets INFORMS Marketing Science 2027 (Jan 2027).
+          Deadlines marked in orange are within 60 days of today. ⚠️ P2 Oct 30 deadline requires interviews to start immediately.
         </p>
         <div class="papers-grid" id="papers-grid"></div>
       </div>
@@ -1004,8 +1005,9 @@
         <div class="section-eyebrow">09 &middot; Publications</div>
         <h2 class="section-title">Published Work</h2>
         <p class="section-lead">
-          The doctoral thesis builds on five peer-reviewed publications completed between 2024 and 2026.
-          These papers establish the empirical and theoretical base for the remaining research.
+          The doctoral thesis builds on seven peer-reviewed publications completed between 2024 and 2026,
+          spanning ACM CHI, ACM UMAP, NordiCHI, Springer, and IPDMC.
+          These papers establish the empirical and theoretical base for the three remaining papers.
         </p>
         <div class="pub-table-wrap">
           <table class="pub-table" id="pub-table">
@@ -1090,14 +1092,14 @@
     ============================================================ */
     const DATA = {
       meta: {
-        title: "Human Digital Twins for Enterprise Decision Support",
-        subtitle: "Platform Validation and Data Economy",
+        title: "Human Digital Twins for Market Research and Enterprise Decision Support",
+        subtitle: "Simulation Design, Fidelity Calibration, and the Economics of a Consented Data Economy",
         candidate: "Bhupender Kumar Saini",
         institution: "Fraunhofer IAO, Stuttgart",
         completion: "Mid 2027",
-        updated: "July 2026",
-        current_phase_id: 1,
-        progress_pct: 22
+        updated: "August 26, 2026",
+        current_phase_id: 2,
+        progress_pct: 38
       },
 
       supervision: {
@@ -1168,9 +1170,30 @@
           venue: "IPDMC 2026",
           venue_short: "IPDMC",
           type: "Full Paper",
-          status: "Published",
+          status: "Presented",
           doi: null,
           contribution: "Requirements engineering for LLM multi-agent decision support systems."
+        },
+        {
+          id: 6,
+          title: "Miscalibrated But Correctable: Bias Taxonomy and Mitigation in LLM-Based Human Digital Twin Simulation",
+          venue: "AMA Winter Conference 2027",
+          venue_short: "AMA",
+          type: "Full Paper",
+          status: "Submitted",
+          doi: null,
+          submission_date: "August 19, 2026",
+          contribution: "Systematic bias taxonomy (RQ1) for LLM persona simulation; introduces CFCI metric and distortion mitigation framework for human digital twins."
+        },
+        {
+          id: 7,
+          title: "Personalizing POI Descriptions with LLMs: An Exploratory Study of User Perceptions",
+          venue: "NordiCHI 2026 Adjunct",
+          venue_short: "NordiCHI",
+          type: "Late Breaking Result",
+          status: "Accepted",
+          doi: null,
+          contribution: "First author (with C. Kumar, J. Blumenröther, M. Bâce). Empirical user perception study of LLM-generated personalized content — informs RQ1 on how faithfully LLMs can represent individual user preferences."
         }
       ],
 
@@ -1178,28 +1201,32 @@
         {
           id: "RQ 1",
           colorClass: "rq-c1",
-          question: "How do different context layers (from generic to full psychological profiling) impact individual-level simulation fidelity and variance calibration across different survey formats?",
+          question: "How can LLM-based multi-agent systems and AI persona simulation environments be designed to faithfully represent human perspectives in enterprise contexts, and what systematic response distortions and fidelity gaps emerge — and how can they be identified and mitigated — when such systems simulate human opinions, judgments, and behavioral decisions?",
           tasks: [
-            "Evaluating seven context strategies against a six-week longitudinal dataset (n=14) across five question formats.",
-            "Introducing the Cross-Format Comparability Index (CFCI) and participant validation on felt authenticity."
+            "System design and requirements: design principles for coherent LLM multi-agent collaboration and explainable reasoning in enterprise decision support (Papers 1, 5 — Springer Book Chapter 2026, IPDMC 2026).",
+            "Simulation infrastructure: architecture and evaluation of an interactive virtual user lab deploying AI persona panels for ideation and product evaluation (Paper 3 — Virtual User Lab, ACM UMAP 2026).",
+            "Distortion taxonomy: systematic identification of response skew, bias propagation, and contextualization effects across LLM survey simulation configurations; introduction of the Cross-Format Comparability Index (CFCI) (Papers 2, 4 — DUPLet UMAP 2026, ACM CHI 2026). Also informs: Paper 7 — Personalizing POI Descriptions with LLMs (NordiCHI 2026, first author).",
+            "Fidelity calibration: measuring deviation between LLM-based digital twin responses and human retest benchmarks; evaluating correction strategies to restore predictive validity (Paper 6 — AMA Winter 2027, submitted Aug 19, 2026)."
           ]
         },
         {
           id: "RQ 2",
           colorClass: "rq-c2",
-          question: "How can a human digital twin simulation platform be designed and evaluated to ensure high usability, perceived authenticity, and user trust?",
+          question: "What design requirements and evaluation criteria define a viable human digital twin platform for enterprise decision support, and how do stakeholder needs analysis, system architecture decisions, and deployment evidence inform platform design principles that move beyond conventional market research approaches?",
           tasks: [
-            "Designing and developing the Twinlytics platform architecture.",
-            "Conducting a comprehensive human-centric user study to evaluate system usability and users' perceived authenticity of their digital twins."
+            "Requirements engineering: deriving design principles from published multi-agent decision support research and semi-structured stakeholder interviews (n=15–20) with enterprise innovation managers and market researchers (Papers 1, 5; P2).",
+            "Platform architecture: design, implementation, and deployment of Twinlytics — integrating twin memory engine, distortion calibration layer, and multi-agent simulation orchestration.",
+            "Deployment evaluation: empirical pilot comparing Twinlytics against traditional survey panels on speed, fidelity, usability, and insight quality; formative expert evaluation as convergent evidence (P2 — ECIS 2027 / ACM CHI 2027)."
           ]
         },
         {
           id: "RQ 3",
           colorClass: "rq-c3",
-          question: "What are the emerging business opportunities, enterprise use cases, and market dynamics of the 'Twin Economy'?",
+          question: "What value creation architectures, consent mechanisms, and economic viability models characterize a user-owned digital twin data marketplace, and what enterprise use cases and ethical governance principles emerge from human-controlled AI simulation at scale?",
           tasks: [
-            "Mapping the transition from reactive analytics to proactive, human-centric HDT ecosystems in enterprise.",
-            "Defining new market architectures, business models, and the economic impact of consent-driven human digital twins."
+            "Use case taxonomy: formalizing enterprise and consumer applications for human digital twins — from reactive analytics to proactive AI-simulation-driven innovation pipelines (P3).",
+            "Economic architecture: designing consent-driven micro-licensing models, zero-knowledge data-sharing mechanisms, and direct user revenue payout structures (~10–20%) as a new Fair-Trade Data paradigm (P3 — INFORMS Marketing Science 2027 / DESRIST 2027).",
+            "Viability and governance: assessing stakeholder value distribution, GDPR-compliant data sovereignty frameworks, and long-term market feasibility of the twin data economy."
           ]
         }
       ],
@@ -1207,33 +1234,33 @@
       papers_planned: [
         {
           id: "P1",
-          title: "Beyond the Average Human: Measuring Individual Fidelity and Felt Authenticity in Agentic Human Digital Twins",
-          status: "running",
-          venue: "ACM IUI 2027",
-          venue_location: "Helsinki, Feb 2027",
-          deadline_str: "Aug 20, 2026",
-          deadline_date: "2026-08-20",
-          focus: "Systematic evaluation of 7 context strategies on a 6-week longitudinal dataset (n=14, 96 questions). Introduces CFCI for cross-format evaluation. Participant validation highlights idiolect modelling as the next frontier."
+          title: "Miscalibrated But Correctable: Bias Taxonomy and Mitigation in LLM-Based Human Digital Twin Simulation",
+          status: "submitted",
+          venue: "AMA Winter Conference 2027",
+          venue_location: "Feb 2027",
+          deadline_str: "Submitted Aug 19, 2026",
+          deadline_date: "2026-08-19",
+          focus: "Systematic bias taxonomy for LLM persona simulation across 7 context strategies (n=14, 6-week dataset). Introduces the Cross-Format Comparability Index (CFCI). Originally targeting ACM IUI 2027 — submitted to AMA Winter Conference 2027 on August 19, 2026."
         },
         {
           id: "P2",
-          title: "Designing Twinlytics: A System Architecture and Human Evaluation of a Digital Twin Platform",
+          title: "Twinlytics: Stakeholder Requirements and Platform Design for Human Digital Twin-Based Market Research",
           status: "planned",
-          venue: "ACM CHI 2027",
-          venue_location: "Yokohama, May 2027",
-          deadline_str: "Sep 2026",
-          deadline_date: "2026-09-12",
-          focus: "Consolidates platform requirements and architecture. Features a real user study validating Twinlytics with human participants to measure perceived authenticity, trust, and usability."
+          venue: "ECIS 2027",
+          venue_location: "Luxembourg, May 2027",
+          deadline_str: "Oct 30, 2026",
+          deadline_date: "2026-10-30",
+          focus: "15–20 semi-structured interviews with enterprise innovation managers and market researchers, producing a validated set of design requirements for a human digital twin platform. Twinlytics introduced as the design artifact implementing these requirements. Strategy: interviews-only for Oct 30 ECIS submission; pilot comparison added in journal extension. Alt: ACM DIS 2027 (Jan 18, 2027) / ECIS if Oct 30 is missed. ⚠️ Interviews must begin immediately — Oct 30 is 9 weeks away."
         },
         {
           id: "P3",
-          title: "The Twin Economy: Business Opportunities and Enterprise Integration of Human Digital Twins",
+          title: "The Twin Economy: Use Cases, Value Architecture, and Governance of a Human Digital Twin Data Marketplace",
           status: "planned",
-          venue: "ECIS 2027",
+          venue: "INFORMS Marketing Science 2027",
           venue_location: "Jun 2027",
-          deadline_str: "Nov 2026",
-          deadline_date: "2026-11-20",
-          focus: "Explores the market economy of Human Digital Twins. Defines new enterprise use cases, shifting from reactive processes to proactive, human-centric simulation ecosystems."
+          deadline_str: "Draft Sep 2026 · Submit Jan 2027",
+          deadline_date: "2027-01-20",
+          focus: "P3 completes BEFORE P2. Runs in parallel with P2 interviews. Pure desk research — no primary data collection needed. Step 0: Scopus/WoS gap search (4 query strings, one afternoon) before any writing. Then: taxonomy (Nickerson et al., ≥20 use cases, 2-coder protocol), maturity model (Becker et al., compared against Gartner/CMMI/NIST), Delphi expert validation (6–10 external experts), techno-economic model grounded in two-sided market theory (Rochet &amp; Tirole, sensitivity analysis 10–20% revenue share), GDPR gap analysis (Articles 5, 7, 22, 25). Two theoretical claims: (1) consent granularity and monetization are orthogonal dimensions; (2) two-sided market theory extends to AI simulation markets. Alternatives: DESRIST 2027 (best fit for the design science method, exact 2027 deadline not yet posted, likely ~Jan 2027 based on the 2026 pattern), PACIS 2027 (confirmed deadline March 1, 2027, Auckland, safest fallback)."
         }
       ],
 
@@ -1256,35 +1283,42 @@
           name: "Phase 1",
           subtitle: "Distortion Study",
           period: "Q3 2026",
-          status: "running",
+          status: "completed",
           tasks: [
-            { name: "Finalize longitudinal dataset analysis (n=14) and calculate CFCI metrics", status: "running", deadline: null },
-            { name: "Paper 1 manuscript drafting and internal review", status: "running", deadline: null },
-            { name: "Submit Paper 1 to ACM IUI 2027", status: "planned", deadline: "Aug 20, 2026" }
+            { name: "Finalize longitudinal dataset analysis (n=14) and calculate CFCI metrics", status: "completed", deadline: null },
+            { name: "Paper 1 manuscript drafting and internal review", status: "completed", deadline: null },
+            { name: "Submit Paper 1 (Miscalibrated But Correctable) to AMA Winter Conference 2027", status: "completed", deadline: "Aug 19, 2026" }
           ]
         },
         {
           id: 2,
           name: "Phase 2",
-          subtitle: "Platform User Study",
+          subtitle: "Stakeholder Interviews",
           period: "Q3\u2013Q4 2026",
           status: "planned",
           tasks: [
-            { name: "Deploy Twinlytics platform to user study participants", status: "planned", deadline: null },
-            { name: "Evaluate system usability and perceived authenticity of twins", status: "planned", deadline: null },
-            { name: "Submit Paper 2 to ACM CHI / CSCW", status: "planned", deadline: "Sep/Nov 2026" }
+            { name: "Finalize semi-structured interview protocol (n=15\u201320) and start ethics clearance if required", status: "planned", deadline: "ASAP" },
+            { name: "Recruit and conduct interviews with enterprise innovation managers and market researchers", status: "planned", deadline: "Sep\u2013Oct 2026" },
+            { name: "Thematic analysis and design principles derivation from interview data", status: "planned", deadline: null },
+            { name: "Submit P2 (interviews-only version) to ECIS 2027. Alt: ACM DIS 2027 (Jan 18, 2027)", status: "planned", deadline: "Oct 30, 2026" }
           ]
         },
         {
           id: 3,
           name: "Phase 3",
-          subtitle: "Twin Economics",
-          period: "Q1\u2013Q2 2027",
+          subtitle: "Twin Economics (parallel with P2)",
+          period: "Aug\u2013Sep 2026 draft \u00b7 Jan 2027 submit",
           status: "planned",
           tasks: [
-            { name: "Analyze enterprise integration and new market architecture", status: "planned", deadline: null },
-            { name: "Define use cases for proactive HDT ecosystems", status: "planned", deadline: null },
-            { name: "Submit Paper 3 to ECIS 2027", status: "planned", deadline: "Nov 2026" }
+            { name: "Step 0: Scopus + Web of Science gap search (4 query strings) \u2014 confirm novelty before writing anything", status: "planned", deadline: "Immediately" },
+            { name: "Collect \u226520 use cases from 5 platforms (Twinlytics, Simile AI, Listen Labs, Aaru, Synthetic Users)", status: "planned", deadline: null },
+            { name: "Build taxonomy using Nickerson method with 2-coder protocol and Cohen\u2019s kappa check", status: "planned", deadline: null },
+            { name: "Build 5-stage maturity model (Becker procedure); compare against Gartner AI, CMMI, NIST Privacy models", status: "planned", deadline: null },
+            { name: "Run 2-round Delphi with 6\u201310 external experts; validate taxonomy, maturity model, and economic assumptions", status: "planned", deadline: null },
+            { name: "Techno-economic model grounded in two-sided market theory; sensitivity analysis on 10\u201320% revenue share", status: "planned", deadline: null },
+            { name: "GDPR gap analysis: map consent/revenue architecture against Articles 5, 7, 22, 25", status: "planned", deadline: null },
+            { name: "Complete full draft \u2014 target September 2026", status: "planned", deadline: "Sep 2026" },
+            { name: "Submit P3 to INFORMS Marketing Science 2027. Alt: DESRIST 2027 / PACIS 2027 (Mar 1, 2027)", status: "planned", deadline: "Jan 2027" }
           ]
         },
         {
@@ -1325,15 +1359,31 @@
       ],
 
       next_steps: [
-        "Finalize longitudinal dataset analysis (n=14) and CFCI calculations for Paper 1. Submission deadline: August 20, 2026.",
-        "Deploy Twinlytics to real user study participants to evaluate perceived authenticity and usability (Paper 2).",
-        "Define new enterprise use cases and finalize business opportunity models for the Twin Economics study (Paper 3)."
+        "✅ P1 (Miscalibrated But Correctable) submitted to AMA Winter Conference 2027 on August 19, 2026. Treat as done — monitor for review decision and prepare JMR/Marketing Science extension if accepted.",
+        "⚠️ URGENT: Book supervisor alignment meeting with Prof. Hölzle this week. Present new thesis title, locked RQs, 3-paper plan, and target venues. Get formal approval before ECIS submission.",
+        "⚠️ URGENT: Finalize P2 interview protocol and schedule first 5 interviews. Oct 30 ECIS deadline is 9 weeks away. Ethics clearance must start now if required.",
+        "Decide immediately whether P2 targets Oct 30 (interviews only, ECIS) or Jan 2027 (DIS / UMAP). This decision cannot wait — every week of delay removes a submission option.",
+        "Run Scopus + Web of Science gap search NOW before writing P3: query strings 'digital twin marketplace', 'human digital twin consent monetization', 'synthetic user platform pricing two-sided market', 'fair data AI simulation'. One afternoon — eliminates a serious submission risk.",
+        "Start P3 immediately — methodology is locked, no primary data needed. Target full draft by September 2026. P3 completes before P2.",
+        "P2 runs in parallel: interviews can be scheduled and conducted while P3 is being written. The two papers do not depend on each other's findings.",
+        "Write the RQ1 synthesis thesis chapter using Papers 1–6. All material exists. A few weeks of writing clears a major thesis deliverable with no new empirical work."
       ],
 
+      topic_evolution: {
+        old_title: "Leveraging LLMs and Agentic AI for Enhanced Innovation and Organizational Decision Making",
+        new_title: "Human Digital Twins for Market Research and Enterprise Decision Support",
+        changed: "June 2026",
+        supervisor_informed: false,
+        note: "The PhD topic was revised approximately 2 months ago (June 2026). The original proposal focused broadly on LLMs and multi-agent AI for innovation management and MCDM. The new direction sharpens to human digital twins grounded in behavioral data, with Twinlytics as the validated platform artifact. The 5 published papers bridge both topics. Prof. Hölzle has NOT yet been formally informed of this scope change — this must be scheduled."
+      },
+
       committee_topics: [
-        "Ethics compliance review for Phase 1 and Phase 2 human subjects data collection (Fraunhofer IAO & Uni Stuttgart).",
-        "Feedback on the new 3-paper structure, prioritizing the human user study over the Prolific baseline.",
-        "Refining the 'Twin Economy' use cases and identifying optimal industry partners for Phase 3."
+        "⚠️ Formal approval of revised thesis title ('Human Digital Twins for Market Research and Enterprise Decision Support') and locked RQ framing — this meeting must happen before October.",
+        "Ethics clearance timeline for P2 stakeholder interviews (n=15–20): what approval is required at Fraunhofer IAO and the university partner, and how long does it take?",
+        "P2 scope decision: interviews-only submission to ECIS 2027 (Oct 30) vs. full interviews-plus-pilot for a January 2027 alternative. Supervisor guidance needed on what is sufficient for the thesis.",
+        "P3 venue strategy: INFORMS Marketing Science 2027 (marketing science track, primary) vs. DESRIST 2027 (best fit for the design science method, 2027 deadline not yet posted) vs. PACIS 2027 (confirmed deadline March 1, 2027, safest fallback).",
+        "Differential privacy and data governance assumptions for P3: does the GDPR gap analysis need legal review from the institution before publication?",
+        "Cumulative thesis structure: confirm that RQ1 is considered answered by the 6 existing papers (Papers 1–5 + P1), so the thesis chapter is synthesis only and no new RQ1 study is needed."
       ]
     };
 
@@ -1386,12 +1436,12 @@
       const curPhase = DATA.phases.find(p => p.id === DATA.meta.current_phase_id);
 
       const kpis = [
-        { label: 'Published Papers',    val: DATA.publications.length,       sub: 'ACM CHI, UMAP, Springer, IPDMC', cls: 'accent-top' },
-        { label: 'Papers Planned',      val: DATA.papers_planned.length,     sub: 'IUI, CHI, ECIS \u00b7 RQ1\u2013RQ3', cls: 'accent-top' },
+        { label: 'Published Papers',    val: DATA.publications.length,       sub: 'ACM CHI, UMAP, NordiCHI, Springer, IPDMC', cls: 'accent-top' },
+        { label: 'Papers Planned',      val: DATA.papers_planned.length,     sub: 'AMA, ECIS, INFORMS \u00b7 RQ1\u2013RQ3', cls: 'accent-top' },
         { label: 'Target Defense',      val: DATA.meta.completion,           sub: 'Cumulative thesis format', cls: 'accent-top' },
         { label: 'Primary Supervisors', val: DATA.supervision.primary.length, sub: DATA.supervision.primary.map(s => s.name.split(' ').slice(-2).join(' ')).join(', '), cls: 'accent-top' },
         { label: 'Active Phase',        val: 'Phase ' + DATA.meta.current_phase_id, sub: curPhase ? curPhase.subtitle : '', cls: 'running-top' },
-        { label: 'P1 Deadline',         val: dLabel, sub: DATA.papers_planned[0].deadline_str + ' \u00b7 ' + DATA.papers_planned[0].venue, cls: urgent ? 'warn-top' : 'accent-top' }
+        { label: 'P1 Status',           val: 'Submitted', sub: DATA.papers_planned[0].deadline_str + ' \u00b7 ' + DATA.papers_planned[0].venue, cls: 'running-top' }
       ];
 
 
